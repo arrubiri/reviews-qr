@@ -313,7 +313,7 @@
 
     let negocios;
     try {
-      const res = await fetch('negocios.json');
+      const res = await fetch('negocios.json', { cache: 'no-store' });
       negocios = await res.json();
     } catch (e) {
       card.innerHTML = '<p style="text-align:center;color:var(--ink-soft)">No se ha podido cargar la información del negocio.</p>';
@@ -341,7 +341,7 @@
 
     // Cargar banco de frases sugeridas para este gremio
     try {
-      const res = await fetch('comentarios.json');
+      const res = await fetch('comentarios.json', { cache: 'no-store' });
       const banco = await res.json();
       COMENTARIOS = banco[CONFIG.category] || banco['generico'];
     } catch (e) {
