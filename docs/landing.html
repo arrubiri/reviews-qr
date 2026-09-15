@@ -8,19 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-
-  /* ============================================================
-     CONFIGURACIÓN POR NEGOCIO
-     Cambia solo estas variables para reutilizar la plantilla.
-     ============================================================ */
   :root{
-    --paper:      #EDEEE6;   /* fondo de la página */
-    --card:       #FFFFFF;   /* fondo de la tarjeta */
-    --ink:        #20241F;   /* texto principal */
-    --ink-soft:   #565E54;   /* texto secundario */
-    --amber:      #C9982E;   /* estrellas / acento cálido */
+    --paper:      #EDEEE6;
+    --card:       #FFFFFF;
+    --ink:        #20241F;
+    --ink-soft:   #565E54;
+    --amber:      #C9982E;
     --amber-dim:  #E7DCC2;
-    --teal:       #3E6259;   /* feedback privado */
+    --teal:       #3E6259;
     --teal-dim:   #DDE6E2;
     --line:       #E2E1D6;
     --radius:     18px;
@@ -50,15 +45,8 @@
     border:1px solid var(--line);
   }
 
-  .business{
-    text-align:center;
-    margin-bottom:4px;
-  }
-  .business .emoji{
-    font-size:34px;
-    display:block;
-    margin-bottom:10px;
-  }
+  .business{ text-align:center; margin-bottom:22px; }
+  .business .emoji{ font-size:34px; display:block; margin-bottom:10px; }
   .business h1{
     font-family:'Newsreader', serif;
     font-weight:500;
@@ -70,71 +58,7 @@
   .business p{
     color:var(--ink-soft);
     font-size:14.5px;
-    margin:0 0 28px;
-    line-height:1.5;
-  }
-
-  /* --- Paso 1: estrellas --- */
-  .stars{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    margin-bottom:6px;
-  }
-  .star-btn{
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:4px;
-    line-height:0;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .star-btn svg{
-    width:38px;
-    height:38px;
-    stroke:var(--amber);
-    stroke-width:1.5;
-    fill:none;
-    transition:fill 120ms ease, transform 120ms ease;
-  }
-  .star-btn.filled svg{
-    fill:var(--amber);
-  }
-  .star-btn:active svg{
-    transform:scale(0.9);
-  }
-  .star-caption{
-    text-align:center;
-    font-size:13px;
-    color:var(--ink-soft);
-    height:18px;
-    margin-top:2px;
-  }
-
-  /* --- Paso 2: resultado según puntuación --- */
-  .result{
-    display:none;
-    margin-top:26px;
-    padding-top:24px;
-    border-top:1px solid var(--line);
-    animation:rise 220ms ease;
-  }
-  .result.active{ display:block; }
-  @keyframes rise{
-    from{ opacity:0; transform:translateY(6px); }
-    to{ opacity:1; transform:translateY(0); }
-  }
-
-  .result h2{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:19px;
-    margin:0 0 6px;
-  }
-  .result p.sub{
-    color:var(--ink-soft);
-    font-size:14px;
-    margin:0 0 20px;
+    margin:0 0 8px;
     line-height:1.5;
   }
 
@@ -145,7 +69,7 @@
     text-decoration:none;
     font-family:'IBM Plex Sans', sans-serif;
     font-size:15px;
-    padding:14px 18px;
+    padding:15px 18px;
     border-radius:12px;
     box-sizing:border-box;
     margin-bottom:10px;
@@ -156,6 +80,7 @@
     background:var(--amber);
     color:#fff;
     font-weight:600;
+    font-size:16px;
   }
   .action-primary.teal{
     background:var(--teal);
@@ -168,18 +93,52 @@
     border-color:var(--line);
     font-weight:500;
   }
-  .action-secondary.teal-text{ color:var(--teal); border-color:var(--teal-dim); }
-  .action-secondary.amber-text{ color:var(--amber); border-color:var(--amber-dim); }
 
-  /* --- Formulario de feedback privado --- */
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:18px 0 14px;
+    color:#9BA096;
+    font-size:12.5px;
+  }
+  .divider::before,
+  .divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .private-toggle{
+    background:none;
+    border:none;
+    padding:0;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--teal);
+    cursor:pointer;
+    text-decoration:underline;
+    display:block;
+    margin:6px auto 0;
+  }
+
   .private-form{
     display:none;
-    margin-top:14px;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
   }
-  .private-form.active{ display:block; }
+  .private-form.active{ display:block; animation:rise 220ms ease; }
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
   .private-form textarea{
     width:100%;
-    min-height:88px;
+    min-height:96px;
     border:1px solid var(--line);
     border-radius:12px;
     padding:12px 14px;
@@ -191,35 +150,10 @@
   }
   .private-form textarea:focus{ outline:2px solid var(--teal-dim); border-color:var(--teal); }
 
-  .footer-note{
-    text-align:center;
-    font-size:11.5px;
-    color:#9BA096;
-    margin-top:22px;
-  }
-
-  /* --- Caja de comentario sugerido --- */
-  .suggestion-box{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:14px 16px;
-    margin-bottom:16px;
-  }
-  .suggestion-label{
-    font-size:12.5px;
-    color:var(--ink-soft);
-    margin:0 0 6px;
-  }
-  .suggestion-text{
-    font-size:14.5px;
-    line-height:1.5;
-    margin:0 0 10px;
-    font-style:italic;
-  }
-  .suggestion-actions{
+  .suggestion-row{
     display:flex;
     gap:16px;
+    margin-bottom:10px;
   }
   .suggestion-link{
     background:none;
@@ -228,14 +162,20 @@
     font-family:'IBM Plex Sans', sans-serif;
     font-size:13px;
     font-weight:600;
-    color:var(--amber);
+    color:var(--teal);
     cursor:pointer;
     text-decoration:underline;
   }
-  .suggestion-link.teal-link{ color:var(--teal); }
+
+  .footer-note{
+    text-align:center;
+    font-size:11.5px;
+    color:#9BA096;
+    margin-top:22px;
+  }
 
   @media (prefers-reduced-motion: reduce){
-    .result{ animation:none; }
+    .private-form.active{ animation:none; }
   }
 </style>
 </head>
@@ -244,47 +184,26 @@
   <div class="card">
     <div class="business">
       <span class="emoji" id="bizEmoji">☕</span>
-      <h1 id="bizName">Café Lantana</h1>
+      <h1 id="bizName">Cargando…</h1>
       <p>¿Qué tal tu experiencia hoy? Nos ayuda muchísimo saberlo.</p>
     </div>
 
-    <div class="stars" id="stars" role="radiogroup" aria-label="Puntuación de 1 a 5 estrellas"></div>
-    <div class="star-caption" id="starCaption">&nbsp;</div>
+    <a href="#" id="googleLink" target="_blank" rel="noopener" class="action action-primary amber">
+      Dejar reseña en Google
+    </a>
 
-    <!-- Resultado para 4-5 estrellas -->
-    <div class="result" id="resultHigh">
-      <h2>¡Nos alegra un montón!</h2>
-      <p class="sub">Si tienes 20 segundos, una reseña en Google nos ayuda a que nos encuentre más gente como tú.</p>
+    <div class="divider">o</div>
 
-      <div class="suggestion-box" id="suggestionHigh">
-        <p class="suggestion-label">¿Te da pereza escribir? Puedes usar esto de base:</p>
-        <p class="suggestion-text" id="suggestionTextHigh"></p>
-        <div class="suggestion-actions">
-          <button type="button" class="suggestion-link" id="copySuggestionHigh">Copiar</button>
-          <button type="button" class="suggestion-link" id="anotherSuggestionHigh">Otra sugerencia</button>
-        </div>
+    <button type="button" class="private-toggle" id="openPrivateForm">
+      Prefiero contarlo en privado
+    </button>
+
+    <div class="private-form" id="privateForm">
+      <div class="suggestion-row">
+        <button type="button" class="suggestion-link" id="useSuggestion">Usar una sugerencia como punto de partida</button>
       </div>
-
-      <a href="#" id="googleLink" target="_blank" rel="noopener" class="action action-primary amber">Dejar reseña en Google</a>
-      <button type="button" class="action action-secondary" id="skipHigh">Ahora no, gracias</button>
-    </div>
-
-    <!-- Resultado para 1-3 estrellas -->
-    <div class="result" id="resultLow">
-      <h2>Vaya, sentimos que no haya ido bien</h2>
-      <p class="sub">Cuéntanos qué ha pasado directamente — lo lee el propio negocio y así podemos arreglarlo.</p>
-
-      <button type="button" class="action action-primary teal" id="openPrivateForm">Contarlo directamente</button>
-
-      <div class="private-form" id="privateForm">
-        <div class="suggestion-actions" style="margin-bottom:10px;">
-          <button type="button" class="suggestion-link teal-link" id="useSuggestionLow">Usar una sugerencia como punto de partida</button>
-        </div>
-        <textarea id="feedbackText" placeholder="Cuéntanos qué ha pasado..."></textarea>
-        <button type="button" class="action action-primary teal" id="sendPrivate">Enviar</button>
-      </div>
-
-      <a href="#" id="googleLinkLow" target="_blank" rel="noopener" class="action action-secondary amber-text">O si prefieres, déjanos una reseña pública</a>
+      <textarea id="feedbackText" placeholder="Cuéntanos qué ha pasado..."></textarea>
+      <button type="button" class="action action-primary teal" id="sendPrivate">Enviar al negocio</button>
     </div>
 
     <div class="footer-note">Tu opinión solo se usa para mejorar. Gracias por tu tiempo.</div>
@@ -293,14 +212,9 @@
 <script>
   /* ============================================================
      CARGA DE DATOS DEL NEGOCIO
-     La landing es la MISMA para todos los negocios. Lo único que
-     cambia es el identificador "n" en la URL del QR, por ejemplo:
-     https://tudominio.com/landing.html?n=cafe-lantana
-
-     Ese identificador se busca en negocios.json (mismo directorio),
-     que es la única fuente de datos de todos los negocios.
      ============================================================ */
   let CONFIG = null;
+  let COMENTARIOS = null;
 
   async function cargarNegocio() {
     const slug = new URLSearchParams(window.location.search).get('n');
@@ -339,14 +253,12 @@
     document.getElementById('bizName').textContent = CONFIG.businessName;
     document.getElementById('bizEmoji').textContent = CONFIG.emoji;
     document.getElementById('googleLink').href = CONFIG.googleReviewUrl;
-    document.getElementById('googleLinkLow').href = CONFIG.googleReviewUrl;
 
-    // Cargar banco de frases sugeridas para este gremio
     try {
       const res = await fetch('comentarios.json');
       if (!res.ok) throw new Error('HTTP ' + res.status);
       const banco = await res.json();
-      COMENTARIOS = banco[CONFIG.category] || banco['generico'];
+      COMENTARIOS = banco[CONFIG.category] || banco['generico'] || null;
     } catch (e) {
       console.error('Error cargando comentarios.json:', e);
       COMENTARIOS = null;
@@ -355,111 +267,37 @@
 
   cargarNegocio();
 
-  /* ---- Sugerencias de comentario ---- */
-  let COMENTARIOS = null;
-
-  function fraseAleatoria(nivel){
-    if(!COMENTARIOS || !COMENTARIOS[nivel] || !COMENTARIOS[nivel].length) return '';
-    const lista = COMENTARIOS[nivel];
+  /* ---- Sugerencia de texto para el email privado ---- */
+  function fraseAleatoriaBaja(){
+    if(!COMENTARIOS || !COMENTARIOS.baja || !COMENTARIOS.baja.length) return '';
+    const lista = COMENTARIOS.baja;
     return lista[Math.floor(Math.random() * lista.length)];
   }
 
-  function mostrarSugerenciaAlta(){
-    const texto = fraseAleatoria('alta');
-    document.getElementById('suggestionTextHigh').textContent = texto ? '"' + texto + '"' : '';
-    document.getElementById('suggestionHigh').style.display = texto ? 'block' : 'none';
-  }
-
-  document.getElementById('anotherSuggestionHigh').addEventListener('click', mostrarSugerenciaAlta);
-
-  document.getElementById('copySuggestionHigh').addEventListener('click', () => {
-    const texto = frasesActualAlta();
-    navigator.clipboard.writeText(texto).then(() => {
-      const btn = document.getElementById('copySuggestionHigh');
-      const original = btn.textContent;
-      btn.textContent = 'Copiado ✓';
-      setTimeout(() => { btn.textContent = original; }, 1500);
-    });
-  });
-
-  function frasesActualAlta(){
-    return document.getElementById('suggestionTextHigh').textContent.replace(/^"|"$/g, '');
-  }
-
-  document.getElementById('useSuggestionLow').addEventListener('click', () => {
-    const texto = fraseAleatoria('baja');
+  document.getElementById('useSuggestion').addEventListener('click', () => {
+    const texto = fraseAleatoriaBaja();
     if(texto){
       document.getElementById('feedbackText').value = texto;
     }
   });
 
-  /* ---- Estrellas ---- */
-  const starsWrap = document.getElementById('stars');
-  const caption = document.getElementById('starCaption');
-  const captions = {1:"Mala", 2:"Regular", 3:"Normal", 4:"Buena", 5:"Excelente"};
-
-  const starSvg = `<svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.63 22 9.24 16.8 14.14 18.18 21 12 17.4 5.82 21 7.2 14.14 2 9.24 8.91 8.63 12 2"/></svg>`;
-
-  let selected = 0;
-
-  for(let i=1;i<=5;i++){
-    const btn = document.createElement('button');
-    btn.className = 'star-btn';
-    btn.type = 'button';
-    btn.setAttribute('role','radio');
-    btn.setAttribute('aria-checked','false');
-    btn.setAttribute('aria-label', i + ' estrella' + (i>1?'s':''));
-    btn.innerHTML = starSvg;
-    btn.dataset.value = i;
-
-    btn.addEventListener('mouseenter', () => paint(i));
-    btn.addEventListener('mouseleave', () => paint(selected));
-    btn.addEventListener('click', () => choose(i));
-
-    starsWrap.appendChild(btn);
-  }
-
-  function paint(value){
-    [...starsWrap.children].forEach((el, idx) => {
-      el.classList.toggle('filled', idx < value);
-    });
-    caption.textContent = value ? captions[value] : '\u00A0';
-  }
-
-  function choose(value){
-    selected = value;
-    paint(value);
-    [...starsWrap.children].forEach((el, idx) => {
-      el.setAttribute('aria-checked', idx < value ? 'true' : 'false');
-    });
-
-    document.getElementById('resultHigh').classList.remove('active');
-    document.getElementById('resultLow').classList.remove('active');
-
-    if(value >= 4){
-      document.getElementById('resultHigh').classList.add('active');
-      mostrarSugerenciaAlta();
-    } else {
-      document.getElementById('resultLow').classList.add('active');
-    }
-  }
-
-  /* ---- Feedback privado ---- */
+  /* ---- Abrir formulario privado ---- */
   document.getElementById('openPrivateForm').addEventListener('click', () => {
     document.getElementById('privateForm').classList.add('active');
     document.getElementById('openPrivateForm').style.display = 'none';
   });
 
+  /* ---- Enviar feedback privado por email ---- */
   document.getElementById('sendPrivate').addEventListener('click', () => {
+    if(!CONFIG) return;
     const text = document.getElementById('feedbackText').value.trim();
-    if(!text){ return; }
+    if(!text){
+      document.getElementById('feedbackText').focus();
+      return;
+    }
     const subject = encodeURIComponent('Comentario de un cliente — ' + CONFIG.businessName);
-    const body = encodeURIComponent('Puntuación: ' + selected + ' estrellas\n\n' + text);
+    const body = encodeURIComponent(text);
     window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
-  });
-
-  document.getElementById('skipHigh').addEventListener('click', () => {
-    document.getElementById('resultHigh').innerHTML = '<h2>¡Gracias por tu visita!</h2>';
   });
 </script>
 
