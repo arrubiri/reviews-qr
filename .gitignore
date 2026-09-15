@@ -1,0 +1,11 @@
+# Datos reales de clientes — nunca en git
+clients/*
+!clients/.gitkeep
+
+# Secretos / claves de API
+.env
+*.key
+
+# Sistema
+.DS_Store
+node_modules/

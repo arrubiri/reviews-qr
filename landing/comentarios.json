@@ -1,0 +1,313 @@
+{
+  "hosteleria": {
+    "alta": [
+      "Experiencia muy recomendable, repetiré seguro.",
+      "Todo buenísimo, se nota el cuidado en cada plato.",
+      "Trato inmejorable y comida de diez.",
+      "Uno de esos sitios a los que da gusto volver.",
+      "Muy buena relación calidad-precio, salí encantado.",
+      "El servicio fue rápido y muy amable en todo momento.",
+      "Cocina cuidada y ambiente muy agradable.",
+      "Perfecto para una comida sin prisas, lo recomiendo.",
+      "Los platos estaban muy bien presentados y sabían aún mejor.",
+      "Se nota que cuidan los detalles, muy buena experiencia.",
+      "Volveré sin duda, todo estuvo genial.",
+      "Personal muy atento, comida excelente.",
+      "Un acierto total, lo recomiendo sin dudarlo.",
+      "Ambiente muy agradable y comida deliciosa.",
+      "De lo mejor que he probado por la zona últimamente."
+    ],
+    "baja": [
+      "La comida tardó bastante más de lo esperado.",
+      "El plato no estaba a la temperatura adecuada.",
+      "El trato podría haber sido más atento.",
+      "Esperaba algo más por el precio pagado.",
+      "El local estaba bastante ruidoso para poder disfrutar tranquilo.",
+      "Alguno de los platos llegó frío.",
+      "El servicio fue lento en un día que no estaba muy lleno.",
+      "Puede mejorar en la rapidez de atención."
+    ]
+  },
+  "automocion": {
+    "alta": [
+      "Un gran profesional, lo recomendaría sin dudarlo.",
+      "Muy buen trato y explican bien lo que hacen.",
+      "Rápidos, serios y a buen precio.",
+      "Se nota la experiencia, quedé muy satisfecho.",
+      "Diagnóstico claro y sin sorpresas en el precio final.",
+      "Muy de fiar, no intentan venderte nada de más.",
+      "Trabajo impecable y entregado a tiempo.",
+      "Explican todo con paciencia, se agradece mucho.",
+      "Precio justo y muy buen trabajo, repetiré seguro.",
+      "Profesionales de verdad, mi coche quedó perfecto.",
+      "Atención cercana y muy buen servicio en general.",
+      "Cumplieron con el plazo prometido sin problema.",
+      "Muy recomendable, se ve que saben lo que hacen.",
+      "Buena comunicación durante todo el proceso.",
+      "Confianza total, así da gusto llevar el coche al taller."
+    ],
+    "baja": [
+      "El presupuesto final no coincidió con el inicial.",
+      "Tardaron más de lo que me habían dicho.",
+      "Me hubiera gustado más comunicación durante el proceso.",
+      "El problema no quedó del todo resuelto a la primera.",
+      "Esperaba un poco más de explicación sobre la avería.",
+      "El precio me pareció algo elevado para el trabajo realizado.",
+      "La atención podría haber sido más cercana.",
+      "Falta un poco de seguimiento tras la reparación."
+    ]
+  },
+  "generico": {
+    "alta": [
+      "Muy buena experiencia en general, lo recomiendo.",
+      "Trato estupendo y buen servicio.",
+      "Todo correcto y muy buena atención.",
+      "Repetiré sin duda, encantado con el resultado.",
+      "Profesionales y muy atentos en todo momento.",
+      "Muy satisfecho con el servicio recibido.",
+      "Buena atención y resultado tal como esperaba.",
+      "Volvería sin dudarlo, muy recomendable.",
+      "Servicio rápido y bien hecho.",
+      "Gran experiencia, todo salió como esperaba.",
+      "Muy buen trato de principio a fin.",
+      "Cumplieron con lo prometido, muy contento."
+    ],
+    "baja": [
+      "La espera fue más larga de lo esperado.",
+      "Esperaba un poco más por el precio pagado.",
+      "El trato podría mejorar en algunos aspectos.",
+      "El resultado no fue exactamente lo que buscaba.",
+      "La comunicación podría haber sido más clara.",
+      "Se podría mejorar la rapidez del servicio."
+    ]
+  },
+  "belleza": {
+    "alta": [
+      "Salí encantada, el resultado superó lo que esperaba.",
+      "Muy buen trato y mucho cuidado en cada detalle.",
+      "Profesionales de verdad, se nota la experiencia.",
+      "Ambiente muy agradable y resultado impecable.",
+      "Escuchan lo que quieres y aciertan siempre.",
+      "Muy recomendable, salgo siempre satisfecha.",
+      "Trato cercano y muy buen resultado final.",
+      "Se nota el mimo con el que trabajan.",
+      "Un acierto total, repetiré sin dudarlo.",
+      "Muy buena atención de principio a fin.",
+      "El sitio ideal para desconectar y salir genial.",
+      "Resultado natural y muy bien conseguido."
+    ],
+    "baja": [
+      "El resultado no fue exactamente lo que había pedido.",
+      "Tuve que esperar bastante más de lo previsto.",
+      "Esperaba un poco más de atención al detalle.",
+      "El precio final fue más alto de lo que pensaba.",
+      "Me hubiera gustado que me explicaran mejor el proceso.",
+      "El ambiente estaba algo saturado ese día.",
+      "El resultado no duró tanto como esperaba.",
+      "La cita se retrasó bastante respecto a la hora reservada."
+    ]
+  },
+  "salud": {
+    "alta": [
+      "Trato muy profesional y cercano, me sentí en buenas manos.",
+      "Explican todo con calma y resuelven cualquier duda.",
+      "Muy buena atención, se nota que les importa el paciente.",
+      "Puntualidad y trato exquisito, totalmente recomendable.",
+      "Diagnóstico claro y seguimiento muy cercano.",
+      "Instalaciones muy limpias y personal encantador.",
+      "Me han tratado con mucha profesionalidad y paciencia.",
+      "Gran equipo, siempre dispuestos a ayudar.",
+      "Confianza total, se nota que saben lo que hacen.",
+      "Muy atentos en todo el proceso, lo recomiendo.",
+      "Excelente atención, resolvieron mi problema rápido.",
+      "Trato humano y mucha profesionalidad."
+    ],
+    "baja": [
+      "El tiempo de espera fue más largo de lo esperado.",
+      "Me hubiera gustado más tiempo para resolver mis dudas.",
+      "La cita se retrasó bastante sobre el horario previsto.",
+      "Esperaba un seguimiento más cercano tras la consulta.",
+      "El trato podría ser algo más cercano.",
+      "La comunicación sobre tiempos podría mejorar.",
+      "Costó bastante conseguir cita en un plazo razonable."
+    ]
+  },
+  "retail": {
+    "alta": [
+      "Muy buena atención y variedad de producto.",
+      "Encontré justo lo que buscaba, encantada con la compra.",
+      "Trato muy amable y buenos consejos a la hora de elegir.",
+      "Tienda con mucho encanto y personal muy atento.",
+      "Calidad muy buena y precio justo.",
+      "Me ayudaron a elegir sin agobiar, se agradece.",
+      "Siempre encuentro algo que me gusta, muy recomendable.",
+      "Buen surtido y atención cercana.",
+      "Volveré seguro, muy contenta con la compra.",
+      "Producto tal cual se veía, calidad muy buena.",
+      "Atención personalizada y muy buen gusto en la selección."
+    ],
+    "baja": [
+      "El producto no era exactamente como esperaba.",
+      "El precio me pareció algo elevado para lo que ofrece.",
+      "Poca variedad de tallas/opciones disponibles ese día.",
+      "Esperaba un poco más de atención al entrar.",
+      "El proceso de cambio/devolución podría ser más ágil.",
+      "La tienda estaba bastante desorganizada ese día.",
+      "Me hubiera gustado más información sobre el producto."
+    ]
+  },
+  "inmobiliaria": {
+    "alta": [
+      "Proceso muy claro y sin sorpresas de última hora.",
+      "Nos acompañaron en todo momento, muy buena gestión.",
+      "Encontraron justo lo que buscábamos, muy profesionales.",
+      "Comunicación constante y trato muy cercano.",
+      "Gestión rápida y eficaz, todo salió según lo previsto.",
+      "Muy buenos consejos durante todo el proceso.",
+      "Confianza total, se nota que conocen bien el mercado.",
+      "Resolvieron cualquier duda con mucha paciencia.",
+      "Proceso ágil y sin complicaciones, muy recomendable.",
+      "Trato honesto y profesional en todo momento."
+    ],
+    "baja": [
+      "El proceso se alargó más de lo que esperábamos.",
+      "Hubiera agradecido más comunicación en algunos momentos.",
+      "Algunos detalles del contrato no quedaron claros al principio.",
+      "Esperaba más opciones ajustadas a lo que pedimos.",
+      "La respuesta a algunas dudas tardó bastante.",
+      "El seguimiento tras la firma podría mejorar."
+    ]
+  },
+  "gimnasio": {
+    "alta": [
+      "Muy buen ambiente y entrenadores que se implican de verdad.",
+      "Instalaciones cuidadas y siempre limpias.",
+      "El trato del personal es cercano y motivador.",
+      "Buena variedad de clases y horarios flexibles.",
+      "Se nota el seguimiento personalizado, muy recomendable.",
+      "Ambiente muy agradable para entrenar a gusto.",
+      "Entrenadores muy profesionales y atentos.",
+      "Material siempre disponible y bien mantenido.",
+      "Muy buena relación calidad-precio.",
+      "El mejor gimnasio en el que he estado, sin duda."
+    ],
+    "baja": [
+      "A ciertas horas se llena bastante y falta material.",
+      "Alguna máquina llevaba tiempo sin repararse.",
+      "Esperaba más variedad de clases en mi horario.",
+      "El vestuario podría estar mejor cuidado.",
+      "El seguimiento inicial podría ser más completo.",
+      "Los precios subieron sin mucho aviso previo."
+    ]
+  },
+  "veterinaria": {
+    "alta": [
+      "Trataron a mi mascota con muchísimo cariño.",
+      "Explican todo con calma, se nota que les gusta su trabajo.",
+      "Diagnóstico rápido y muy buen seguimiento después.",
+      "Mi mascota sale siempre tranquila de la consulta.",
+      "Profesionales muy cercanos y de confianza.",
+      "Atención excelente tanto para el animal como para el dueño.",
+      "Muy buena disponibilidad ante una urgencia.",
+      "Se involucran de verdad en el bienestar del animal.",
+      "Trato exquisito, no cambiaría de veterinario.",
+      "Muy recomendable, siempre resuelven con paciencia."
+    ],
+    "baja": [
+      "El tiempo de espera para la consulta fue largo.",
+      "El precio de algunos tratamientos me pareció elevado.",
+      "Me hubiera gustado más explicación tras el diagnóstico.",
+      "Costó conseguir cita en un plazo razonable.",
+      "El seguimiento posterior podría ser más cercano.",
+      "Mi mascota se notó algo nerviosa con el trato recibido."
+    ]
+  },
+  "informatica": {
+    "alta": [
+      "Solucionaron el problema rápido y sin coste innecesario.",
+      "Explican en cristiano, sin marear con tecnicismos.",
+      "Muy buen precio y trabajo hecho con seriedad.",
+      "Diagnóstico honesto, no intentan cobrar de más.",
+      "Reparación rápida y bien explicada.",
+      "Muy profesionales, dejaron el equipo como nuevo.",
+      "Atención cercana y muy buena relación calidad-precio.",
+      "Resolvieron algo que en otro sitio no supieron arreglar.",
+      "Trato honesto y muy buen servicio técnico.",
+      "Rápidos y de fiar, repetiré sin duda."
+    ],
+    "baja": [
+      "La reparación tardó más de lo que me dijeron en un principio.",
+      "El presupuesto final subió respecto al inicial.",
+      "Esperaba más explicación sobre lo que tenía el equipo.",
+      "El seguimiento tras la reparación podría mejorar.",
+      "El precio me pareció algo alto para el arreglo realizado.",
+      "Costó bastante que me devolvieran el equipo a tiempo."
+    ]
+  },
+  "fontaneria_electricidad": {
+    "alta": [
+      "Vinieron rápido y solucionaron la avería sin complicaciones.",
+      "Muy profesionales, dejaron todo limpio al terminar.",
+      "Presupuesto claro desde el principio, sin sorpresas.",
+      "Puntuales y muy buen trabajo, totalmente recomendable.",
+      "Resolvieron una urgencia en tiempo récord.",
+      "Se nota el oficio, trabajo bien hecho y duradero.",
+      "Muy buena relación calidad-precio.",
+      "Explican bien lo que hacen y por qué.",
+      "De confianza, ya los he llamado varias veces.",
+      "Rápidos, limpios y muy profesionales."
+    ],
+    "baja": [
+      "Tardaron más de lo acordado en venir.",
+      "El presupuesto final no coincidió con el que me dieron por teléfono.",
+      "Tuve que llamar varias veces para que confirmaran la cita.",
+      "Esperaba que dejaran la zona de trabajo más recogida.",
+      "El precio me pareció algo elevado para el arreglo.",
+      "La avería no quedó resuelta del todo a la primera."
+    ]
+  },
+  "academia": {
+    "alta": [
+      "Los profesores explican con mucha paciencia y claridad.",
+      "Se nota la mejora desde que empezó las clases.",
+      "Ambiente cercano y muy buen seguimiento del progreso.",
+      "Profesores muy implicados, se preocupan de verdad.",
+      "Metodología clara y resultados visibles rápido.",
+      "Trato cercano y clases muy bien planteadas.",
+      "Muy recomendable, gran diferencia desde que empezamos.",
+      "Se adaptan al ritmo de cada alumno.",
+      "Profesionales y muy pacientes en las explicaciones.",
+      "Muy buena comunicación con las familias sobre el progreso."
+    ],
+    "baja": [
+      "Esperaba un seguimiento más cercano del progreso.",
+      "Algunos horarios eran complicados de cuadrar.",
+      "Me hubiera gustado más comunicación sobre la evolución.",
+      "El grupo era algo numeroso para la atención esperada.",
+      "El material de clase podría estar más actualizado.",
+      "El precio me pareció algo alto para lo ofrecido."
+    ]
+  },
+  "alimentacion": {
+    "alta": [
+      "Producto siempre fresco y de muy buena calidad.",
+      "Trato cercano, como en las tiendas de toda la vida.",
+      "Muy buena relación calidad-precio.",
+      "Siempre atienden con una sonrisa, da gusto comprar allí.",
+      "Buena variedad y producto de proximidad.",
+      "Se nota que cuidan mucho lo que venden.",
+      "Atención cercana y muy buenos consejos.",
+      "Producto de calidad y precio justo.",
+      "El trato de siempre, cercano y de confianza.",
+      "Muy recomendable, mejor que las grandes superficies."
+    ],
+    "baja": [
+      "El precio me pareció algo elevado comparado con otras tiendas.",
+      "Algunos productos no estaban tan frescos como esperaba.",
+      "El horario de apertura no siempre coincide con el anunciado.",
+      "Esperaba algo más de variedad en ciertos productos.",
+      "Bastante cola en las horas punta.",
+      "El trato podría ser algo más ágil en momentos de mucha gente."
+    ]
+  }
+}
