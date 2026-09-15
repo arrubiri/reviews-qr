@@ -13,4 +13,13 @@
     "google_review_url": "https://google.com",
     "owner_email": "tuemail@ejemplo.com"
   }
+  
+  "bar-viena": {
+    "business_name": "Bar Viena",
+    "emoji": "☕",
+    "category": "hosteleria",
+    "google_review_url": "https://www.google.com/search?q=bar+viena&sca_esv=6511eabd1253659d&sxsrf=APpeQnugiwFudRYB4-Rm7sgmGjSmQ13QMg%3A1789469063190&source=hp&ei=hyGparCMCbiO-d8PvbWJoAo&iflsig=ABILxe8AAAAAaqkvl0f1CORJBUVC8lzimH8vKDFLHHoc&ved=0ahUKEwjw6-Hes_CWAxU4R_4FHb1aAqQQ4dUDCCY&uact=5&oq=bar+viena&gs_lp=Egdnd3Mtd2l6IgliYXIgdmllbmEyBBAjGCcyCxAuGIAEGMcBGK8BMgUQABiABDIOEC4YgAQYxwEYrwEYjgUyBRAAGIAEMg4QLhiABBjHARivARiOBTILEC4YgAQYxwEYrwEyDhAuGIAEGMcBGK8BGI4FMgoQABiABBjLARgKMg4QLhiABBjHARivARiOBUi-D1AAWNcKcAB4AJABAJgB8wKgAbILqgEHMS42LjEuMbgBA8gBAPgBAZgCCaAC5QvCAgsQLhiABBjHARjRA8ICDhAuGIAEGIoFGLEDGIMBwgILEAAYgAQYsQMYgwHCAhEQLhiABBixAxiDARjHARjRA8ICERAAGIAEGIoFGI0GGLEDGIMBwgIEEAAYA8ICChAjGPAFGMkCGCfCAgoQIxjJAhjwBRgnwgIKEAAYgAQYigUYQ8ICCxAuGIAEGLEDGIMBwgIIEAAYgAQYsQPCAgQQLhgnwgIHECMY8AUYJ8ICEBAAGIAEGIoFGEMYsQMYgwHCAgsQABiABBiKBRiSA5gDAJIHBzEuNi4xLjGgB916sgcHMS42LjEuMbgH5QvCBwcwLjIuNi4xyAclgAgB&sclient=gws-wiz#lrd=0xd50924e4dacf757:0x2c097386561643fe,3,,,,",
+    "owner_email": "dueño@ejemplo.com"
+  },
+
 }
