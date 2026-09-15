@@ -17,7 +17,7 @@ import json
 import sys
 from pathlib import Path
 
-NEGOCIOS_PATH = Path(__file__).resolve().parent.parent / "landing" / "negocios.json"
+NEGOCIOS_PATH = Path(__file__).resolve().parent.parent / "docs" / "negocios.json"
 
 
 def anadir(slug, business_name, emoji, category, google_review_url, owner_email):
