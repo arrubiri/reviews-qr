@@ -289,7 +289,7 @@
   let COMENTARIOS = null;
 
   // URL de tu Apps Script — registra cada clic como una fila en la hoja
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFDi8DVodn7tQ-vXeiidL5_s8mmPZPGQo8gqE0izJd8BSLG0yxt1zUNY8UHSD36gLEDg/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbmze7mqxHx-T6VTOYmAkhidfjh8VTyio3qTFELKJUPFbfdoXv_aQI3V5J0zwvUN53ww/exec';
 
   function registrarActividad(tipo){
     if(!CONFIG) return;
@@ -415,7 +415,7 @@
     const subject = encodeURIComponent('Comentario de un cliente — ' + CONFIG.businessName);
     const body = encodeURIComponent(text);
     window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
-    registrarActividad('privado');
+    registrarActividad('privada');
 
     // Si tras un segundo seguimos en la página (no ha perdido el foco ni se
     // ha ocultado el documento), lo más probable es que no haya ninguna
