@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -211,6 +212,29 @@
     margin-top:22px;
   }
 
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:28px;
+    transform:translateX(-50%) translateY(10px);
+    background:var(--ink);
+    color:#fff;
+    font-size:13.5px;
+    font-weight:500;
+    padding:12px 18px;
+    border-radius:10px;
+    box-shadow:0 8px 24px -8px rgba(0,0,0,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 200ms ease, transform 200ms ease;
+    max-width:90vw;
+    text-align:center;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
   @media (prefers-reduced-motion: reduce){
     .private-form.active{ animation:none; }
   }
@@ -254,6 +278,8 @@
 
     <div class="footer-note">Tu opinión solo se usa para mejorar. Gracias por tu tiempo.</div>
   </div>
+
+  <div class="toast" id="mailToast">Se necesita una aplicación de correo instalada.</div>
 
 <script>
   /* ============================================================
@@ -353,6 +379,13 @@
   });
 
   /* ---- Enviar feedback privado por email ---- */
+  function mostrarToast(mensaje){
+    const toast = document.getElementById('mailToast');
+    toast.textContent = mensaje;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+  }
+
   document.getElementById('sendPrivate').addEventListener('click', () => {
     if(!CONFIG) return;
     const text = document.getElementById('feedbackText').value.trim();
@@ -363,6 +396,15 @@
     const subject = encodeURIComponent('Comentario de un cliente — ' + CONFIG.businessName);
     const body = encodeURIComponent(text);
     window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
+
+    // Si tras un segundo seguimos en la página (no ha perdido el foco ni se
+    // ha ocultado el documento), lo más probable es que no haya ninguna
+    // aplicación de correo instalada para abrir el enlace mailto.
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && document.hasFocus()) {
+        mostrarToast('Se necesita una aplicación de correo instalada.');
+      }
+    }, 1000);
   });
 </script>
 
