@@ -1,16 +1,23 @@
 {
   "cafe-lantana": {
-    "business_name": "Café Lantana",
-    "emoji": "☕",
+    "business_name": "Caf? Lantana",
+    "emoji": "?",
     "category": "hosteleria",
     "google_review_url": "https://g.page/r/EJEMPLO-CAMBIAR-ESTE-ENLACE/review",
-    "owner_email": "dueño@ejemplo.com"
+    "owner_email": "due?o@ejemplo.com"
   },
   "bar-viena": {
     "business_name": "Bar Viena",
-    "emoji": "☕",
+    "emoji": "?",
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJV_esTU6SUA0R_kMWVoZzCSw",
     "owner_email": "marrublairigoyen@gmail.com"
+  },
+  "prueba": {
+    "business_name": "Prueba",
+    "emoji": "?",
+    "category": "hosteleria",
+    "google_review_url": "https://example.com",
+    "owner_email": "test@test.com"
   }
 }
