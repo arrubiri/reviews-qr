@@ -12,12 +12,5 @@
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJV_esTU6SUA0R_kMWVoZzCSw",
     "owner_email": "marrublairigoyen@gmail.com"
-  },
-  "prueba": {
-    "business_name": "Prueba",
-    "emoji": "?",
-    "category": "hosteleria",
-    "google_review_url": "https://example.com",
-    "owner_email": "test@test.com"
   }
 }
