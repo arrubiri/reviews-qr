@@ -137,7 +137,7 @@
   async function cargar(){
     try {
       const [rMapa, rNegocios] = await Promise.all([
-        fetch('../docs/mapa.json?t=' + Date.now()).catch(() => fetch('mapa.json?t=' + Date.now())),
+        fetch('mapa.json?t=' + Date.now()),
         fetch('negocios.json?t=' + Date.now())
       ]);
       MAPA = await rMapa.json();
