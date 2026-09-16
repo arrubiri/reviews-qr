@@ -160,15 +160,13 @@
 
       const slug = params.get('slug');
       const landingUrl = 'https://arrubiri.github.io/reviews-qr/landing.html?n=' + slug;
-      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(landingUrl);
-
+      
       result.className = 'result ok';
       result.innerHTML =
         '<strong>✅ Negocio guardado.</strong><br>' +
         'Espera 1-2 minutos a que GitHub Pages reconstruya.<br>' +
-        '<div class="qr"><img src="' + qrUrl + '" alt="QR"></div>' +
-        '<div class="url"><a href="' + landingUrl + '" target="_blank">' + landingUrl + '</a></div>' +
-        '<div class="url" style="margin-top:12px;">Descarga el QR: clic derecho sobre la imagen → "Guardar imagen como…"</div>';
+        '<div class="url" style="margin-top:12px;">Enlace de su landing: <a href="' + landingUrl + '" target="_blank">' + landingUrl + '</a></div>' +
+        '<div class="url" style="margin-top:8px;">Ahora asigna sus QRs en la hoja <strong>QRs</strong>.</div>';
 
       btn.disabled = false;
       btn.textContent = 'Guardar otro negocio';
