@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asignar QRs — Reviews QR</title>
+<style>
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:#EDEEE6;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color:#20241F;
+    padding:16px;
+    font-size:14px;
+  }
+  .card{
+    max-width:640px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:14px;
+    padding:20px;
+    border:1px solid #E2E1D6;
+  }
+  h1{ font-size:18px; margin:0 0 4px; }
+  p.sub{ color:#565E54; font-size:13px; margin:0 0 16px; }
+  .bar{
+    display:flex;
+    gap:8px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  input, select{
+    padding:10px 12px;
+    border:1px solid #E2E1D6;
+    border-radius:8px;
+    font-size:14px;
+    font-family:inherit;
+    background:#fff;
+  }
+  input#buscar{ flex:1; min-width:120px; }
+  select#slug{ min-width:160px; }
+  button{
+    padding:10px 14px;
+    border:none;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+  }
+  button.asignar{ background:#C9982E; color:#fff; }
+  button.liberar{ background:#3E6259; color:#fff; }
+  button:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  .list{
+    border:1px solid #E2E1D6;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:14px;
+    max-height:60vh;
+    overflow-y:auto;
+  }
+  .row{
+    display:flex;
+    align-items:center;
+    padding:10px 12px;
+    gap:10px;
+    border-bottom:1px solid #E2E1D6;
+    font-family:monospace;
+    font-size:13.5px;
+  }
+  .row:last-child{ border-bottom:none; }
+  .row.libre{ background:#fff; color:#20241F; }
+  .row.asignado{ background:#E7EFEA; color:#3E6259; }
+  .row input[type=checkbox]{
+    width:18px; height:18px;
+    accent-color:#C9982E;
+  }
+  .row .codigo{ flex:1; font-weight:600; }
+  .row .slug{ color:inherit; opacity:0.8; }
+
+  .result{
+    margin-top:14px;
+    padding:12px;
+    border-radius:8px;
+    font-size:13px;
+    display:none;
+  }
+  .result.ok{ display:block; background:#DDE6E2; color:#3E6259; }
+  .result.err{ display:block; background:#F4E0DC; color:#8A3A2A; }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Asignar QRs</h1>
+    <p class="sub">Marca los códigos, elige el bar y pulsa Asignar.</p>
+
+    <div class="bar">
+      <input id="buscar" placeholder="Buscar código...">
+      <button id="btnTodos" class="liberar">Todos</button>
+      <button id="btnLibres" class="liberar">Libres</button>
+      <button id="btnNinguno" class="liberar">Ninguno</button>
+    </div>
+
+    <div class="bar">
+      <select id="slug">
+        <option value="">— Elegir bar —</option>
+      </select>
+      <button id="btnAsignar" class="asignar">Asignar seleccionados</button>
+      <button id="btnLiberar" class="liberar">Liberar seleccionados</button>
+    </div>
+
+    <div id="list" class="list"></div>
+    <div id="result" class="result"></div>
+  </div>
+
+<script>
+  const ADMIN_URL = 'https://script.google.com/macros/s/AKfycbxdLmsYV3wPMQvgqE-T9j1_gQEH-mipEUTMsDK3ICwyce_jSaDKOBPwZpwoMCtKcQ03/exec';
+  const ADMIN_TOKEN = '69e39400-cb07-46a4-a0cb-5dea19c52612';
+
+  let MAPA = {};
+  let NEGOCIOS = [];
+
+  const listEl = document.getElementById('list');
+  const resultEl = document.getElementById('result');
+  const buscarEl = document.getElementById('buscar');
+  const slugEl = document.getElementById('slug');
+
+  function mostrarResultado(tipo, texto){
+    resultEl.className = 'result ' + tipo;
+    resultEl.textContent = texto;
+    if (tipo === 'ok') setTimeout(() => { resultEl.className = 'result'; }, 5000);
+  }
+
+  async function cargar(){
+    try {
+      const [rMapa, rNegocios] = await Promise.all([
+        fetch('../docs/mapa.json?t=' + Date.now()).catch(() => fetch('mapa.json?t=' + Date.now())),
+        fetch('negocios.json?t=' + Date.now())
+      ]);
+      MAPA = await rMapa.json();
+      const negocios = await rNegocios.json();
+      NEGOCIOS = Object.keys(negocios).sort();
+
+      // Poblar el desplegable
+      for (const slug of NEGOCIOS) {
+        const opt = document.createElement('option');
+        opt.value = slug;
+        opt.textContent = slug;
+        slugEl.appendChild(opt);
+      }
+
+      render();
+    } catch (e) {
+      mostrarResultado('err', 'Error cargando datos: ' + e.message);
+    }
+  }
+
+  function render(){
+    const filtro = buscarEl.value.trim().toUpperCase();
+    listEl.innerHTML = '';
+
+    const codigos = Object.keys(MAPA).sort();
+    for (const codigo of codigos) {
+      if (filtro && !codigo.includes(filtro)) continue;
+      const slug = MAPA[codigo];
+
+      const row = document.createElement('label');
+      row.className = 'row ' + (slug ? 'asignado' : 'libre');
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = codigo;
+      cb.dataset.slug = slug;
+
+      const codeSpan = document.createElement('span');
+      codeSpan.className = 'codigo';
+      codeSpan.textContent = codigo;
+
+      const slugSpan = document.createElement('span');
+      slugSpan.className = 'slug';
+      slugSpan.textContent = slug ? slug : '(libre)';
+
+      row.appendChild(cb);
+      row.appendChild(codeSpan);
+      row.appendChild(slugSpan);
+      listEl.appendChild(row);
+    }
+  }
+
+  function seleccionados(){
+    return Array.from(document.querySelectorAll('#list input[type=checkbox]:checked'))
+      .map(cb => cb.value);
+  }
+
+  document.getElementById('btnTodos').onclick = () => {
+    document.querySelectorAll('#list input[type=checkbox]').forEach(cb => cb.checked = true);
+  };
+  document.getElementById('btnLibres').onclick = () => {
+    document.querySelectorAll('#list input[type=checkbox]').forEach(cb => {
+      cb.checked = !cb.dataset.slug;
+    });
+  };
+  document.getElementById('btnNinguno').onclick = () => {
+    document.querySelectorAll('#list input[type=checkbox]').forEach(cb => cb.checked = false);
+  };
+
+  buscarEl.addEventListener('input', render);
+
+  async function enviar(accion){
+    const codigos = seleccionados();
+    if (!codigos.length) {
+      mostrarResultado('err', 'No has seleccionado ningún código.');
+      return;
+    }
+    const slug = slugEl.value;
+    if (accion === 'asignarQRs' && !slug) {
+      mostrarResultado('err', 'Elige un bar del desplegable.');
+      return;
+    }
+
+    document.getElementById('btnAsignar').disabled = true;
+    document.getElementById('btnLiberar').disabled = true;
+    mostrarResultado('ok', 'Enviando...');
+
+    try {
+      const res = await fetch(ADMIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          accion: accion,
+          token: ADMIN_TOKEN,
+          slug: slug,
+          codigos: codigos
+        })
+      });
+      const data = await res.json();
+
+      if (!data.ok) {
+        mostrarResultado('err', 'Error: ' + (data.error || 'desconocido'));
+      } else {
+        mostrarResultado('ok', '✅ ' + data.cambiados + ' códigos actualizados. Espera 1-2 min a que GitHub Pages lo propague.');
+        // Refrescar
+        setTimeout(cargar, 1500);
+      }
+    } catch (e) {
+      mostrarResultado('err', 'Error de red: ' + e.message);
+    } finally {
+      document.getElementById('btnAsignar').disabled = false;
+      document.getElementById('btnLiberar').disabled = false;
+    }
+  }
+
+  document.getElementById('btnAsignar').onclick = () => enviar('asignarQRs');
+  document.getElementById('btnLiberar').onclick = () => enviar('liberarQRs');
+
+  cargar();
+</script>
+
+</body>
+</html>
