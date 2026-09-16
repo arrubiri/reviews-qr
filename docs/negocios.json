@@ -12,5 +12,12 @@
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJV_esTU6SUA0R_kMWVoZzCSw",
     "owner_email": "marrublairigoyen@gmail.com"
+  },
+  "cerveceria-liverpool": {
+    "business_name": "Cerveceria Liverpool",
+    "emoji": "?",
+    "category": "hosteleria",
+    "google_review_url": "https://search.google.com/local/writerevew?placeid= ChIJCR3zSKqTUA0RyNit2JLRbNE",
+    "owner_email": "admape@gmail.com"
   }
 }
