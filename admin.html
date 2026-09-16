@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Reviews QR</title>
+<style>
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:#EDEEE6;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color:#20241F;
+    padding:32px 18px;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+  }
+  .card{
+    width:100%;
+    max-width:520px;
+    background:#fff;
+    border-radius:18px;
+    padding:32px 28px;
+    box-shadow:0 12px 32px -16px rgba(32,36,31,0.18);
+    border:1px solid #E2E1D6;
+  }
+  h1{ font-size:22px; margin:0 0 6px; }
+  p.sub{ color:#565E54; font-size:14px; margin:0 0 24px; }
+  label{ display:block; font-size:13px; font-weight:600; margin:14px 0 6px; color:#565E54; }
+  input, select{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid #E2E1D6;
+    border-radius:10px;
+    font-size:14.5px;
+    font-family:inherit;
+    background:#fff;
+    color:#20241F;
+  }
+  input:focus, select:focus{ outline:2px solid #E7DCC2; border-color:#C9982E; }
+  .hint{ font-size:12px; color:#9BA096; margin-top:4px; }
+  button{
+    width:100%;
+    padding:14px;
+    background:#C9982E;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:22px;
+    font-family:inherit;
+  }
+  button:disabled{ background:#ccc; cursor:not-allowed; }
+  .result{
+    margin-top:20px;
+    padding:16px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.5;
+    display:none;
+  }
+  .result.ok{ display:block; background:#DDE6E2; color:#3E6259; }
+  .result.err{ display:block; background:#F4E0DC; color:#8A3A2A; }
+  .result .qr{ text-align:center; margin-top:14px; }
+  .result .qr img{ max-width:220px; border:1px solid #E2E1D6; border-radius:10px; padding:8px; background:#fff; }
+  .result .url{ word-break:break-all; font-size:12.5px; color:#565E54; margin-top:8px; }
+  .result a{ color:inherit; font-weight:600; }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Añadir negocio</h1>
+    <p class="sub">Rellena los datos y se sube solo a GitHub. La landing estará lista en 1-2 min.</p>
+
+    <label>Slug (identificador en la URL)</label>
+    <input id="slug" placeholder="bar-viena" pattern="[a-z0-9-]+">
+    <div class="hint">Solo minúsculas, números y guiones. Sin espacios ni tildes.</div>
+
+    <label>Nombre del negocio</label>
+    <input id="business_name" placeholder="Bar Viena">
+
+    <label>Emoji</label>
+    <input id="emoji" placeholder="🍺" maxlength="4">
+
+    <label>Categoría</label>
+    <select id="category">
+      <option value="hosteleria">Hostelería</option>
+      <option value="automocion">Automoción</option>
+      <option value="belleza">Belleza</option>
+      <option value="salud">Salud</option>
+      <option value="retail">Retail</option>
+      <option value="inmobiliaria">Inmobiliaria</option>
+      <option value="gimnasio">Gimnasio</option>
+      <option value="veterinaria">Veterinaria</option>
+      <option value="informatica">Informática</option>
+      <option value="fontaneria_electricidad">Fontanería / Electricidad</option>
+      <option value="academia">Academia</option>
+      <option value="alimentacion">Alimentación</option>
+      <option value="generico">Genérico</option>
+    </select>
+
+    <label>URL de reseña en Google</label>
+    <input id="google_review_url" placeholder="https://search.google.com/local/writereview?placeid=...">
+
+    <label>Email del dueño</label>
+    <input id="owner_email" type="email" placeholder="dueño@ejemplo.com">
+
+    <button id="enviar">Guardar negocio</button>
+
+    <div class="result" id="resultado"></div>
+  </div>
+
+<script>
+  const ADMIN_URL = 'https://script.google.com/macros/s/AKfycbxdLmsYV3wPMQvgqE-T9j1_gQEH-mipEUTMsDK3ICwyce_jSaDKOBPwZpwoMCtKcQ03/exec';
+  const ADMIN_TOKEN = '69e39400-cb07-46a4-a0cb-5dea19c52612';
+
+  const campos = ['slug', 'business_name', 'emoji', 'category', 'google_review_url', 'owner_email'];
+  const result = document.getElementById('resultado');
+
+  document.getElementById('enviar').addEventListener('click', async () => {
+    const params = new URLSearchParams();
+    params.set('token', ADMIN_TOKEN);
+    for (const id of campos) {
+      const val = document.getElementById(id).value.trim();
+      if (!val) {
+        result.className = 'result err';
+        result.textContent = 'Falta el campo: ' + id;
+        return;
+      }
+      params.set(id, val);
+    }
+
+    const btn = document.getElementById('enviar');
+    btn.disabled = true;
+    btn.textContent = 'Guardando…';
+    result.className = 'result';
+    result.textContent = '';
+
+    try {
+      const res = await fetch(ADMIN_URL + '?' + params.toString());
+      const data = await res.json();
+
+      if (!data.ok) {
+        result.className = 'result err';
+        const errores = {
+          forbidden: 'Token inválido.',
+          slug_ya_existe: 'Ya existe un negocio con ese slug.',
+          slug_invalido: 'Slug inválido. Solo minúsculas, números y guiones.'
+        };
+        result.textContent = errores[data.error] || ('Error: ' + JSON.stringify(data));
+        btn.disabled = false;
+        btn.textContent = 'Guardar negocio';
+        return;
+      }
+
+      const slug = params.get('slug');
+      const landingUrl = 'https://arrubiri.github.io/reviews-qr/landing.html?n=' + slug;
+      const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(landingUrl);
+
+      result.className = 'result ok';
+      result.innerHTML =
+        '<strong>✅ Negocio guardado.</strong><br>' +
+        'Espera 1-2 minutos a que GitHub Pages reconstruya.<br>' +
+        '<div class="qr"><img src="' + qrUrl + '" alt="QR"></div>' +
+        '<div class="url"><a href="' + landingUrl + '" target="_blank">' + landingUrl + '</a></div>' +
+        '<div class="url" style="margin-top:12px;">Descarga el QR: clic derecho sobre la imagen → "Guardar imagen como…"</div>';
+
+      btn.disabled = false;
+      btn.textContent = 'Guardar otro negocio';
+      campos.forEach(id => document.getElementById(id).value = '');
+    } catch (e) {
+      result.className = 'result err';
+      result.textContent = 'Error de red: ' + e.message;
+      btn.disabled = false;
+      btn.textContent = 'Guardar negocio';
+    }
+  });
+</script>
+
+</body>
+</html>
