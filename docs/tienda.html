@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda — Reviews QR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:      #EDEEE6;
+    --card:       #FFFFFF;
+    --ink:        #20241F;
+    --ink-soft:   #565E54;
+    --amber:      #C9982E;
+    --line:       #E2E1D6;
+    --radius:     18px;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    padding:32px 18px;
+    min-height:100vh;
+  }
+
+  .wrap{
+    max-width:900px;
+    margin:0 auto;
+  }
+
+  header{
+    text-align:center;
+    margin-bottom:36px;
+  }
+  header .logo{
+    font-size:34px;
+    display:block;
+    margin-bottom:8px;
+  }
+  header h1{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:32px;
+    margin:0 0 8px;
+    letter-spacing:-0.01em;
+  }
+  header p{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin:0;
+    line-height:1.5;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:18px;
+    margin-bottom:48px;
+  }
+
+  .producto{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:24px 22px;
+    border:1px solid var(--line);
+    box-shadow:0 1px 2px rgba(32,36,31,0.04), 0 12px 32px -16px rgba(32,36,31,0.12);
+    display:flex;
+    flex-direction:column;
+  }
+  .producto .emoji{
+    font-size:32px;
+    margin-bottom:12px;
+    text-align:center;
+  }
+  .producto h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:20px;
+    margin:0 0 8px;
+    text-align:center;
+  }
+  .producto .desc{
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.5;
+    margin:0 0 18px;
+    flex:1;
+    text-align:center;
+  }
+  .producto .precio{
+    font-family:'Newsreader', serif;
+    font-size:26px;
+    font-weight:500;
+    text-align:center;
+    margin:0 0 16px;
+  }
+  .producto .boton{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:15px;
+    font-weight:600;
+    padding:14px 18px;
+    border-radius:12px;
+    background:var(--amber);
+    color:#fff;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 120ms ease;
+  }
+  .producto .boton:hover{
+    transform:translateY(-1px);
+  }
+
+  .info{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    border:1px solid var(--line);
+    text-align:center;
+  }
+  .info h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:24px;
+    margin:0 0 24px;
+  }
+  .pasos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:20px;
+  }
+  .paso{
+    text-align:center;
+  }
+  .paso .num{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--amber);
+    color:#fff;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 12px;
+    font-size:15px;
+  }
+  .paso p{
+    font-size:14px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .paso strong{
+    color:var(--ink);
+    display:block;
+    margin-bottom:4px;
+    font-size:15px;
+  }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:#9BA096;
+    margin-top:40px;
+  }
+  footer a{
+    color:inherit;
+  }
+
+  @media (max-width:520px){
+    header h1{ font-size:26px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <header>
+      <span class="logo">⭐</span>
+      <h1>Reviews QR — Tienda</h1>
+      <p>Elige el formato que mejor encaje con tu negocio.<br>Tarjetas y tótems con código QR personalizado.</p>
+    </header>
+
+    <div class="grid">
+
+      <div class="producto">
+        <div class="emoji">🧲</div>
+        <h2>Imán QR</h2>
+        <p class="desc">Un regalo práctico para tus clientes. Lo pegan en la nevera y dejan reseñas desde casa. Personalizable con el nombre de tu negocio.</p>
+        <p class="precio">3,50 €</p>
+        <a href="https://buy.stripe.com/test_7sYeVdaF21ql0I5bJr7AI01" class="boton" target="_blank" rel="noopener">Comprar</a>
+      </div>
+
+      <div class="producto">
+        <div class="emoji">💳</div>
+        <h2>Tarjeta QR en PVC</h2>
+        <p class="desc">Resistente y duradera. Perfecta para barras y mostradores. Tus clientes solo tienen que escanear.</p>
+        <p class="precio">5,00 €</p>
+        <a href="https://buy.stripe.com/test_cNi8wPdRe3ytfCZbJr7AI04" class="boton" target="_blank" rel="noopener">Comprar</a>
+      </div>
+
+      <div class="producto">
+        <div class="emoji">🪧</div>
+        <h2>Tótem QR en PVC</h2>
+        <p class="desc">Visibilidad garantizada sobre la mesa. Formato grande, resistente y fácil de limpiar.</p>
+        <p class="precio">18,00 €</p>
+        <a href="https://buy.stripe.com/test_fZu28r8wU2upduRbJr7AI00" class="boton" target="_blank" rel="noopener">Comprar</a>
+      </div>
+
+      <div class="producto">
+        <div class="emoji">🪵</div>
+        <h2>Tótem QR en madera</h2>
+        <p class="desc">El acabado premium para bares que cuidan los detalles. Un objeto bonito que invita a escanear.</p>
+        <p class="precio">25,00 €</p>
+        <a href="https://buy.stripe.com/test_6oUaEXeVi2up62paFn7AI05" class="boton" target="_blank" rel="noopener">Comprar</a>
+      </div>
+
+    </div>
+
+    <div class="info">
+      <h2>¿Cómo funciona?</h2>
+      <div class="pasos">
+        <div class="paso">
+          <div class="num">1</div>
+          <p><strong>Escanea el QR</strong>Tu cliente apunta con la cámara del móvil.</p>
+        </div>
+        <div class="paso">
+          <div class="num">2</div>
+          <p><strong>Valora su experiencia</strong>Ve la landing personalizada de tu negocio.</p>
+        </div>
+        <div class="paso">
+          <div class="num">3</div>
+          <p><strong>Deja la reseña</strong>En Google, o un mensaje privado directo a ti.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      © Reviews QR · <a href="https://arrubiri.github.io/reviews-qr/">Inicio</a>
+    </footer>
+
+  </div>
+
+</body>
+</html>
