@@ -3,7 +3,7 @@
     "nombre": "Imán QR",
     "descripcion": "Un regalo práctico para tus clientes. Al ser un obsequio, predispone a dejar una reseña positiva y ayuda a subir el ratio de reseñas. Personalizable con el nombre de tu negocio.",
     "precio": "3,50 €",
-    "imagen": "img/iman.PNG",
+    "imagen": "iman.PNG",
     "url_pago": "https://buy.stripe.com/test_7sYeVdaF21ql0I5bJr7AI01",
     "destacado": false
   },
@@ -11,7 +11,7 @@
     "nombre": "Tarjeta QR en PVC",
     "descripcion": "Resistente y duradera. Perfecta para barras y mostradores. Tus clientes solo tienen que escanear.",
     "precio": "5,00 €",
-    "imagen": "img/tarjeta.PNG",
+    "imagen": "tarjeta.PNG",
     "url_pago": "https://buy.stripe.com/test_cNi8wPdRe3ytfCZbJr7AI04",
     "destacado": true
   },
@@ -19,7 +19,7 @@
     "nombre": "Tótem QR en PVC",
     "descripcion": "Visibilidad garantizada sobre la mesa. Formato grande, resistente y fácil de limpiar.",
     "precio": "18,00 €",
-    "imagen": "img/totem-pvc.PNG",
+    "imagen": "totem-pvc.PNG",
     "url_pago": "https://buy.stripe.com/test_fZu28r8wU2upduRbJr7AI00",
     "destacado": false
   },
@@ -27,7 +27,7 @@
     "nombre": "Tótem QR en madera",
     "descripcion": "El acabado premium para quien cuida los detalles. Un objeto bonito que invita a escanear.",
     "precio": "25,00 €",
-    "imagen": "img/totem-madera.PNG",
+    "imagen": "totem-madera.PNG",
     "url_pago": "https://buy.stripe.com/test_6oUaEXeVi2up62paFn7AI05",
     "destacado": false
   }
