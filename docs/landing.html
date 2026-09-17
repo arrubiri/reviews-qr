@@ -62,42 +62,6 @@
     line-height:1.5;
   }
 
-  .suggestion-box{
-    background:var(--amber-dim);
-    border-radius:12px;
-    padding:14px 16px;
-    margin-bottom:14px;
-  }
-  .suggestion-box .label{
-    font-size:11.5px;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:0.03em;
-    color:#8A6A1E;
-    margin-bottom:6px;
-  }
-  .suggestion-box .text{
-    font-size:14px;
-    line-height:1.5;
-    color:var(--ink);
-    margin-bottom:10px;
-  }
-  .suggestion-actions{
-    display:flex;
-    gap:16px;
-  }
-  .suggestion-actions button{
-    background:none;
-    border:none;
-    padding:0;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:12.5px;
-    font-weight:600;
-    color:#8A6A1E;
-    cursor:pointer;
-    text-decoration:underline;
-  }
-
   .action{
     display:block;
     width:100%;
@@ -135,7 +99,7 @@
 
   .form-textarea{
     width:100%;
-    min-height:110px;
+    min-height:120px;
     border:1px solid var(--line);
     border-radius:12px;
     padding:12px 14px;
@@ -143,11 +107,25 @@
     font-size:14.5px;
     color:var(--ink);
     resize:vertical;
-    margin-bottom:12px;
+    margin-bottom:10px;
     background:#fff;
   }
   .form-textarea:focus{ outline:2px solid var(--amber-dim); border-color:var(--amber); }
   .form-textarea::placeholder{ color:#9BA096; font-style:italic; }
+
+  .other-suggestion{
+    background:none;
+    border:none;
+    padding:0;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    color:#8A6A1E;
+    cursor:pointer;
+    text-decoration:underline;
+    display:block;
+    margin:0 0 16px auto;
+  }
 
   .footer-note{
     text-align:center;
@@ -193,21 +171,12 @@
       <p>¿Qué tal tu experiencia hoy? Nos ayuda muchísimo saberlo.</p>
     </div>
 
-    <!-- ================================================ -->
-    <!-- PASO 1: escribir (opcional) y continuar          -->
-    <!-- ================================================ -->
+    <!-- PASO 1 -->
     <div class="step-1" id="step1">
 
-      <div class="suggestion-box">
-        <div class="label">Sugerencia de reseña</div>
-        <div class="text" id="suggestionText">Cargando sugerencia…</div>
-        <div class="suggestion-actions">
-          <button type="button" id="otherSuggestion">Otra sugerencia</button>
-        </div>
-      </div>
+      <button type="button" id="otherSuggestion" class="other-suggestion">Otra sugerencia</button>
 
-      <textarea id="feedbackText"
-                class="form-textarea"></textarea>
+      <textarea id="feedbackText" class="form-textarea"></textarea>
 
       <button type="button" id="continuar" class="action action-primary amber">
         Copiar y continuar
@@ -215,9 +184,7 @@
 
     </div>
 
-    <!-- ================================================ -->
-    <!-- PASO 2: elegir dónde publicar                    -->
-    <!-- ================================================ -->
+    <!-- PASO 2 -->
     <div class="step-2" id="step2">
       <a href="#" id="googleLink" target="_blank" rel="noopener" class="action action-primary amber">
         Dejar reseña en Google
@@ -240,6 +207,7 @@
   let CONFIG = null;
   let COMENTARIOS = null;
   let textoCliente = '';
+  let sugerenciaActual = '';
 
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9u-uG8gN_fJkaLkSew9yl8L7sYDo-FE03X2oE9htLsInmpEJYPwQ3tlqW03QRiFtB_A/exec';
   const TOKEN_SECRETO = '69e39400-cb07-46a4-a0cb-5dea19c52612';
@@ -264,7 +232,7 @@
   }
 
   /* ============================================================
-     CARGA DE DATOS DEL NEGOCIO
+     CARGA DE DATOS
      ============================================================ */
   async function cargarNegocio() {
     const slug = new URLSearchParams(window.location.search).get('n');
@@ -330,9 +298,9 @@
   }
 
   function mostrarNuevaSugerenciaAlta(){
-    const texto = fraseAleatoria('alta') || 'Cuéntanos qué te ha gustado.';
-    document.getElementById('suggestionText').textContent = texto;
-    document.getElementById('feedbackText').placeholder = texto;
+    sugerenciaActual = fraseAleatoria('alta') || 'Cuéntanos qué te ha gustado.';
+    const ta = document.getElementById('feedbackText');
+    ta.placeholder = 'Sugerencia de comentario: "' + sugerenciaActual + '"';
   }
 
   document.getElementById('otherSuggestion').addEventListener('click', mostrarNuevaSugerenciaAlta);
@@ -342,12 +310,8 @@
      ============================================================ */
   document.getElementById('continuar').addEventListener('click', async () => {
     const textarea = document.getElementById('feedbackText');
-    textoCliente = textarea.value.trim();
-
-    // Si no ha escrito nada, usar la sugerencia como texto
-    if (!textoCliente) {
-      textoCliente = document.getElementById('suggestionText').textContent.trim();
-    }
+    // Si el cliente escribió algo, se usa eso. Si no, se usa la sugerencia.
+    textoCliente = textarea.value.trim() || sugerenciaActual;
 
     if (textoCliente) {
       try {
