@@ -33,7 +33,7 @@
   },
   "informe-mensual": {
     "nombre": "Informe Mensual",
-    "descripcion": "Recibe cada mes en tu correo un informe con las reseñas generadas, análisis de los comentarios con IA y recomendaciones concretas para tu negocio. Sin permanencia, cancela cuando quieras.",
+    "descripcion": "Recibe cada mes en tu correo un informe con el balance de reseñas generadas a traves de nuestro producto, análisis de los comentarios con IA y recomendaciones concretas para tu negocio. Sin permanencia, cancela cuando quieras.",
     "precio": "10,00 €/mes + IVA",
     "imagen": "informe.PNG",
     "url_pago": "https://buy.stripe.com/test_bJedR94gE9WR3Uh7tb7AI06",
