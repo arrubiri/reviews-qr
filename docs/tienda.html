@@ -358,9 +358,7 @@
       if (!claves.length) throw new Error('Sin productos');
 
       // Imagen del hero (usa la del producto destacado, o la primera)
-      const destacado = claves.find(k => productos[k].destacado) || claves[0];
-      document.getElementById('hero-img').innerHTML =
-        '<img src="' + productos[destacado].imagen + '" alt="' + productos[destacado].nombre + '">';
+      document.getElementById('hero-img').innerHTML = '<img src="hero.png" alt="Reviews QR">';
 
       // Lista de productos
       const lista = document.getElementById('lista-productos');
