@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gracias por suscribirte — Reviews QR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEEE6;
+    --card:#FFFFFF;
+    --ink:#20241F;
+    --ink-soft:#565E54;
+    --amber:#C9982E;
+    --line:#E2E1D6;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 20px;
+    min-height:100vh;
+  }
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    padding:44px 32px;
+    max-width:460px;
+    width:100%;
+    text-align:center;
+    border:1px solid var(--line);
+    box-shadow:0 12px 32px -16px rgba(32,36,31,0.18);
+  }
+  .emoji{ font-size:48px; display:block; margin-bottom:14px; }
+  h1{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:28px;
+    margin:0 0 12px;
+    line-height:1.15;
+  }
+  p{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.55;
+    margin:0 0 14px;
+  }
+  .boton{
+    display:block;
+    margin-top:26px;
+    background:var(--amber);
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    font-size:15px;
+    padding:15px 20px;
+    border-radius:12px;
+  }
+  .boton:hover{ transform:translateY(-1px); }
+  .nota{
+    font-size:12px;
+    color:#9BA096;
+    margin-top:22px;
+    line-height:1.5;
+  }
+  a.volver{
+    display:inline-block;
+    margin-top:18px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <span class="emoji">🎉</span>
+    <h1>¡Gracias por suscribirte!</h1>
+    <p>Ya formas parte de <strong>Reviews QR Informe Mensual</strong>.</p>
+    <p>Recibirás el primer informe el próximo día 1 de mes en tu correo. Sin hacer nada.</p>
+
+    <a href="https://billing.stripe.com/p/login/test_fZu28r8wU2upduRbJr7AI00"
+       class="boton" target="_blank" rel="noopener">
+      Gestionar mi suscripción
+    </a>
+
+    <p class="nota">Desde ahí puedes cambiar tu tarjeta, ver tus facturas o cancelar la suscripción cuando quieras.</p>
+
+    <a class="volver" href="https://arrubiri.github.io/reviews-qr/tienda.html">← Volver a la tienda</a>
+  </div>
+
+</body>
+</html>
