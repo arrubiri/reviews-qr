@@ -218,7 +218,6 @@
       token: TOKEN_SECRETO,
       negocio: CONFIG.slug,
       tipo: tipo,
-      email: CONFIG.ownerEmail,
       texto: texto || ''
     });
     fetch(APPS_SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' }).catch(() => {});
