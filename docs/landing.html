@@ -13,13 +13,14 @@
     --card:       #FFFFFF;
     --ink:        #20241F;
     --ink-soft:   #565E54;
-    --amber:      #C9982E;
-    --amber-dim:  #E7DCC2;
     --teal:       #3E6259;
     --teal-dim:   #DDE6E2;
     --green:      #3E8A57;
     --line:       #E2E1D6;
     --radius:     18px;
+    --accent:     #C9982E;
+    --accent-dim: #E7DCC2;
+    --accent-text:#8A6A1E;
   }
 
   *{ box-sizing:border-box; }
@@ -104,7 +105,7 @@
     cursor:pointer;
   }
   .action-primary.amber{
-    background:var(--amber);
+    background:var(--accent);
     color:#fff;
     font-weight:600;
     font-size:16px;
@@ -163,7 +164,7 @@
     margin-bottom:10px;
     background:#fff;
   }
-  .form-textarea:focus{ outline:2px solid var(--amber-dim); border-color:var(--amber); }
+  .form-textarea:focus{ outline:2px solid var(--accent-dim); border-color:var(--accent); }
   .form-textarea::placeholder{ color:#9BA096; font-style:italic; }
 
   .other-suggestion{
@@ -173,7 +174,7 @@
     font-family:'IBM Plex Sans', sans-serif;
     font-size:12.5px;
     font-weight:600;
-    color:#8A6A1E;
+    color:var(--accent-text);
     cursor:pointer;
     text-decoration:underline;
     display:block;
@@ -274,6 +275,30 @@
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9u-uG8gN_fJkaLkSew9yl8L7sYDo-FE03X2oE9htLsInmpEJYPwQ3tlqW03QRiFtB_A/exec';
   const TOKEN_SECRETO = '69e39400-cb07-46a4-a0cb-5dea19c52612';
 
+  const COLORES_CATEGORIA = {
+    'hosteleria':               { accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' },
+    'automocion':               { accent: '#1F3A5F', dim: '#D3DCE8', text: '#1F3A5F' },
+    'belleza':                  { accent: '#C45B7F', dim: '#F0D6DF', text: '#A14263' },
+    'gimnasio':                 { accent: '#B33A2E', dim: '#EBD0CC', text: '#B33A2E' },
+    'salud':                    { accent: '#3E8A57', dim: '#D5E6DB', text: '#2E6B42' },
+    'retail':                   { accent: '#7A5CA8', dim: '#E1D8F0', text: '#5E4685' },
+    'veterinaria':              { accent: '#2E7D5C', dim: '#D2E5DE', text: '#22644A' },
+    'informatica':              { accent: '#2E6FBA', dim: '#D3E1F0', text: '#255F9E' },
+    'fontaneria_electricidad':  { accent: '#D87A2A', dim: '#F3DDC9', text: '#B56216' },
+    'academia':                 { accent: '#4A85C7', dim: '#D6E4F3', text: '#3B6EA5' },
+    'inmobiliaria':             { accent: '#6B7A3A', dim: '#DFE4CC', text: '#56632F' },
+    'alimentacion':             { accent: '#5E7B3D', dim: '#DAE2C9', text: '#4B6331' },
+    'generico':                 { accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' }
+  };
+
+  function aplicarColorCategoria(categoria) {
+    const c = COLORES_CATEGORIA[categoria] || COLORES_CATEGORIA['generico'];
+    const root = document.documentElement.style;
+    root.setProperty('--accent', c.accent);
+    root.setProperty('--accent-dim', c.dim);
+    root.setProperty('--accent-text', c.text);
+  }
+
   function mostrarToast(mensaje){
     const toast = document.getElementById('toast');
     toast.textContent = mensaje;
@@ -332,6 +357,9 @@
       googleReviewUrl: n.google_review_url,
       ownerEmail: n.owner_email
     };
+
+    // Aplicar color según categoría
+    aplicarColorCategoria(CONFIG.category);
 
     document.getElementById('bizName').textContent = CONFIG.businessName;
     document.getElementById('bizEmoji').textContent = CONFIG.emoji;
