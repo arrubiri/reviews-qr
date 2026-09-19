@@ -37,6 +37,7 @@
     padding:28px 18px;
     min-height:100vh;
     gap:24px;
+    transition:background 300ms ease;
   }
 
   .marca-top{ text-align:center; }
@@ -214,6 +215,7 @@
 
   @media (prefers-reduced-motion: reduce){
     .step-2.active, .gracias-screen.active{ animation:none; }
+    body{ transition:none; }
   }
 
   @media (max-width:520px){
@@ -276,24 +278,25 @@
   const TOKEN_SECRETO = '69e39400-cb07-46a4-a0cb-5dea19c52612';
 
   const COLORES_CATEGORIA = {
-    'hosteleria':               { accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' },
-    'automocion':               { accent: '#1F3A5F', dim: '#D3DCE8', text: '#1F3A5F' },
-    'belleza':                  { accent: '#C45B7F', dim: '#F0D6DF', text: '#A14263' },
-    'gimnasio':                 { accent: '#B33A2E', dim: '#EBD0CC', text: '#B33A2E' },
-    'salud':                    { accent: '#3E8A57', dim: '#D5E6DB', text: '#2E6B42' },
-    'retail':                   { accent: '#7A5CA8', dim: '#E1D8F0', text: '#5E4685' },
-    'veterinaria':              { accent: '#2E7D5C', dim: '#D2E5DE', text: '#22644A' },
-    'informatica':              { accent: '#2E6FBA', dim: '#D3E1F0', text: '#255F9E' },
-    'fontaneria_electricidad':  { accent: '#D87A2A', dim: '#F3DDC9', text: '#B56216' },
-    'academia':                 { accent: '#4A85C7', dim: '#D6E4F3', text: '#3B6EA5' },
-    'inmobiliaria':             { accent: '#6B7A3A', dim: '#DFE4CC', text: '#56632F' },
-    'alimentacion':             { accent: '#5E7B3D', dim: '#DAE2C9', text: '#4B6331' },
-    'generico':                 { accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' }
+    'hosteleria':               { paper: '#EDEEE6', accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' },
+    'automocion':               { paper: '#E3E8EF', accent: '#1F3A5F', dim: '#D3DCE8', text: '#1F3A5F' },
+    'belleza':                  { paper: '#F7E8EE', accent: '#C45B7F', dim: '#F0D6DF', text: '#A14263' },
+    'gimnasio':                 { paper: '#F3E3E0', accent: '#B33A2E', dim: '#EBD0CC', text: '#B33A2E' },
+    'salud':                    { paper: '#E6F0E9', accent: '#3E8A57', dim: '#D5E6DB', text: '#2E6B42' },
+    'retail':                   { paper: '#EDE6F5', accent: '#7A5CA8', dim: '#E1D8F0', text: '#5E4685' },
+    'veterinaria':              { paper: '#E1EFE9', accent: '#2E7D5C', dim: '#D2E5DE', text: '#22644A' },
+    'informatica':              { paper: '#E2EDF8', accent: '#2E6FBA', dim: '#D3E1F0', text: '#255F9E' },
+    'fontaneria_electricidad':  { paper: '#F8EBDD', accent: '#D87A2A', dim: '#F3DDC9', text: '#B56216' },
+    'academia':                 { paper: '#E6EFF9', accent: '#4A85C7', dim: '#D6E4F3', text: '#3B6EA5' },
+    'inmobiliaria':             { paper: '#EBEEDD', accent: '#6B7A3A', dim: '#DFE4CC', text: '#56632F' },
+    'alimentacion':             { paper: '#E8EEDD', accent: '#5E7B3D', dim: '#DAE2C9', text: '#4B6331' },
+    'generico':                 { paper: '#EDEEE6', accent: '#C9982E', dim: '#E7DCC2', text: '#8A6A1E' }
   };
 
   function aplicarColorCategoria(categoria) {
     const c = COLORES_CATEGORIA[categoria] || COLORES_CATEGORIA['generico'];
     const root = document.documentElement.style;
+    root.setProperty('--paper', c.paper);
     root.setProperty('--accent', c.accent);
     root.setProperty('--accent-dim', c.dim);
     root.setProperty('--accent-text', c.text);
@@ -358,7 +361,6 @@
       ownerEmail: n.owner_email
     };
 
-    // Aplicar color según categoría
     aplicarColorCategoria(CONFIG.category);
 
     document.getElementById('bizName').textContent = CONFIG.businessName;
