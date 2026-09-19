@@ -19,5 +19,12 @@
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJz2GPiF2SUA0RKj5P_veoiFo",
     "owner_email": "arrubla.irigoyen@gmail.com"
+  },
+  "cafe-iruna": {
+    "business_name": "Cafe Iruña",
+    "emoji": "🍺",
+    "category": "hosteleria",
+    "google_review_url": "https://search.google.com/local/writereview?placedide=ChIJAQxuXfmSUA0RYOkf1Muo0hQ",
+    "owner_email": "arrubla.irigoyen@gmail.com"
   }
 }
