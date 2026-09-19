@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin — Reviews QR</title>
+<title>Admin — Acelera tu reseña</title>
 <style>
   *{ box-sizing:border-box; }
   body{
@@ -65,8 +65,6 @@
   }
   .result.ok{ display:block; background:#DDE6E2; color:#3E6259; }
   .result.err{ display:block; background:#F4E0DC; color:#8A3A2A; }
-  .result .qr{ text-align:center; margin-top:14px; }
-  .result .qr img{ max-width:220px; border:1px solid #E2E1D6; border-radius:10px; padding:8px; background:#fff; }
   .result .url{ word-break:break-all; font-size:12.5px; color:#565E54; margin-top:8px; }
   .result a{ color:inherit; font-weight:600; }
 </style>
@@ -83,6 +81,10 @@
 
     <label>Nombre del negocio</label>
     <input id="business_name" placeholder="Bar Viena">
+
+    <label>Emoji</label>
+    <input id="emoji" placeholder="☕" maxlength="4">
+    <div class="hint">Pega un solo emoji (☕ 🍺 💇 🚗 🏋️ 🐶 ...).</div>
 
     <label>Categoría</label>
     <select id="category">
@@ -120,8 +122,8 @@
   const result = document.getElementById('resultado');
 
   document.getElementById('enviar').addEventListener('click', async () => {
-    const params = new URLSearchParams();
-    params.set('token', ADMIN_TOKEN);
+    // Construimos un payload JSON para evitar problemas de codificación con el emoji
+    const payload = { token: ADMIN_TOKEN };
     for (const id of campos) {
       const val = document.getElementById(id).value.trim();
       if (!val) {
@@ -129,7 +131,7 @@
         result.textContent = 'Falta el campo: ' + id;
         return;
       }
-      params.set(id, val);
+      payload[id] = val;
     }
 
     const btn = document.getElementById('enviar');
@@ -139,7 +141,11 @@
     result.textContent = '';
 
     try {
-      const res = await fetch(ADMIN_URL + '?' + params.toString());
+      const res = await fetch(ADMIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
       const data = await res.json();
 
       if (!data.ok) {
@@ -155,15 +161,15 @@
         return;
       }
 
-      const slug = params.get('slug');
+      const slug = payload.slug;
       const landingUrl = 'https://arrubiri.github.io/reviews-qr/landing.html?n=' + slug;
-      
+
       result.className = 'result ok';
       result.innerHTML =
         '<strong>✅ Negocio guardado.</strong><br>' +
         'Espera 1-2 minutos a que GitHub Pages reconstruya.<br>' +
-        '<div class="url" style="margin-top:12px;">Enlace de su landing: <a href="' + landingUrl + '" target="_blank">' + landingUrl + '</a></div>' +
-        '<div class="url" style="margin-top:8px;">Ahora asigna sus QRs en la hoja <strong>QRs</strong>.</div>';
+        '<div class="url">Enlace de su landing: <a href="' + landingUrl + '" target="_blank">' + landingUrl + '</a></div>' +
+        '<div class="url">Ahora asigna sus QRs en la hoja <strong>QRs</strong>.</div>';
 
       btn.disabled = false;
       btn.textContent = 'Guardar otro negocio';
