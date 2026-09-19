@@ -37,7 +37,7 @@
     gap:24px;
   }
 
-  /* ===== LOGO DE MARCA ARRIBA ===== */
+  /* ===== MARCA ARRIBA ===== */
   .marca-top{
     text-align:center;
   }
@@ -190,7 +190,6 @@
     .step-2.active{ animation:none; }
   }
 
-  /* ===== MÓVIL ===== */
   @media (max-width:520px){
     .marca-top img{ height:80px; }
   }
@@ -214,15 +213,11 @@
 
     <!-- PASO 1 -->
     <div class="step-1" id="step1">
-
       <button type="button" id="otherSuggestion" class="other-suggestion">Otra sugerencia</button>
-
       <textarea id="feedbackText" class="form-textarea"></textarea>
-
       <button type="button" id="continuar" class="action action-primary amber">
         Copiar y continuar
       </button>
-
     </div>
 
     <!-- PASO 2 -->
@@ -242,9 +237,6 @@
   <div class="toast" id="copyToast">Copiado en el portapapeles</div>
 
 <script>
-  /* ============================================================
-     CONFIGURACIÓN
-     ============================================================ */
   let CONFIG = null;
   let COMENTARIOS = null;
   let textoCliente = '';
@@ -271,9 +263,6 @@
     setTimeout(() => { toast.classList.remove('show'); }, 2000);
   }
 
-  /* ============================================================
-     CARGA DE DATOS
-     ============================================================ */
   async function cargarNegocio() {
     const slug = new URLSearchParams(window.location.search).get('n');
     const card = document.querySelector('.card');
@@ -328,9 +317,6 @@
 
   cargarNegocio();
 
-  /* ============================================================
-     SUGERENCIAS
-     ============================================================ */
   function fraseAleatoria(nivel){
     if(!COMENTARIOS || !COMENTARIOS[nivel] || !COMENTARIOS[nivel].length) return '';
     const lista = COMENTARIOS[nivel];
@@ -345,12 +331,41 @@
 
   document.getElementById('otherSuggestion').addEventListener('click', mostrarNuevaSugerenciaAlta);
 
-  /* ============================================================
-     PASO 1: Copiar y continuar
-     ============================================================ */
   document.getElementById('continuar').addEventListener('click', async () => {
     const textarea = document.getElementById('feedbackText');
     textoCliente = textarea.value.trim() || sugerenciaActual;
 
     if (textoCliente) {
-      try
+      try {
+        await navigator.clipboard.writeText(textoCliente);
+        mostrarToast('copyToast', 'Copiado en el portapapeles');
+      } catch (e) {
+        console.warn('No se pudo copiar:', e);
+      }
+    }
+
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.add('active');
+  });
+
+  document.getElementById('googleLink').addEventListener('click', () => {
+    registrarActividad('google', textoCliente);
+  });
+
+  document.getElementById('sendPrivate').addEventListener('click', () => {
+    if(!CONFIG) return;
+    const subject = encodeURIComponent('Comentario de un cliente — ' + CONFIG.businessName);
+    const body = encodeURIComponent(textoCliente || '(Sin comentario)');
+    window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
+    registrarActividad('privada', textoCliente);
+
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && document.hasFocus()) {
+        mostrarToast('mailToast', 'Se necesita una aplicación de correo instalada.');
+      }
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
