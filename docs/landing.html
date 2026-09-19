@@ -42,7 +42,7 @@
     text-align:center;
   }
   .marca-top img{
-    height:90px;
+    height:130px;
     width:auto;
     display:block;
     margin:0 auto;
@@ -50,7 +50,7 @@
   .marca-top .marca-nombre{
     display:block;
     font-family:'Newsreader', serif;
-    font-size:14px;
+    font-size:20px;
     font-weight:500;
     color:var(--ink);
     margin-top:4px;
@@ -59,9 +59,9 @@
   .marca-top .marca-claim{
     display:block;
     font-family:'IBM Plex Sans', sans-serif;
-    font-size:10px;
+    font-size:13px;
     color:var(--ink-soft);
-    margin-top:1px;
+    margin-top:2px;
   }
 
   .card{
@@ -191,7 +191,9 @@
   }
 
   @media (max-width:520px){
-    .marca-top img{ height:80px; }
+    .marca-top img{ height:100px; }
+    .marca-top .marca-nombre{ font-size:18px; }
+    .marca-top .marca-claim{ font-size:12px; }
   }
 </style>
 </head>
@@ -199,7 +201,7 @@
 
   <!-- MARCA -->
   <div class="marca-top">
-    <img src="logo.PNG" alt="Acelera tu reseña">
+    <img src="logo.png" alt="Acelera tu reseña">
     <span class="marca-nombre">Acelera tu reseña</span>
     <span class="marca-claim">Más reseñas, menos esfuerzo</span>
   </div>
