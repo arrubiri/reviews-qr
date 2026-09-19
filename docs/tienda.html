@@ -30,13 +30,15 @@
   .topbar{
     max-width:1100px;
     margin:0 auto;
-    padding:24px 20px 0;
+    padding:32px 20px 0;
     display:flex;
+    flex-direction:column;
     align-items:center;
-    gap:16px;
+    text-align:center;
+    gap:12px;
   }
   .topbar img{
-    height:120px;
+    height:130px;
     width:auto;
   }
   .topbar .marca-nombre{
@@ -277,7 +279,7 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:780px){
-    .topbar img{ height:60px; }
+    .topbar img{ height:100px; }
     .topbar .marca-nombre{ font-size:18px; }
 
     .hero{
@@ -311,7 +313,7 @@
 
   <!-- TOPBAR -->
   <div class="topbar">
-    <img src="logo.PNG" alt="Acelera tu reseña">
+    <img src="logo.png" alt="Acelera tu reseña">
     <div>
       <span class="marca-nombre">Acelera tu reseña</span>
       <span class="marca-claim">Más reseñas, menos esfuerzo</span>
