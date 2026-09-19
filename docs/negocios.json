@@ -26,5 +26,12 @@
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placedide=ChIJAQxuXfmSUA0RYOkf1Muo0hQ",
     "owner_email": "arrubla.irigoyen@gmail.com"
+  },
+  "talleres-gazpi": {
+    "business_name": "Talleres Gazpi",
+    "emoji": "🚗",
+    "category": "automocion",
+    "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJGR_Z5teTUA0RdMc4xOkHJDI",
+    "owner_email": "arrubla.irigoyen@gmail.com"
   }
 }
