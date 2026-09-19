@@ -30,30 +30,31 @@
   .topbar{
     max-width:1100px;
     margin:0 auto;
-    padding:20px 20px 0;
+    padding:24px 20px 0;
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:16px;
   }
   .topbar img{
-    height:48px;
+    height:80px;
     width:auto;
   }
   .topbar .marca-nombre{
     font-family:'Newsreader', serif;
-    font-size:20px;
+    font-size:22px;
     font-weight:500;
     color:var(--ink);
     letter-spacing:-0.01em;
+    display:block;
   }
   .topbar .marca-claim{
     display:block;
     font-family:'IBM Plex Sans', sans-serif;
-    font-size:11px;
+    font-size:12px;
     color:var(--ink-soft);
     font-weight:400;
     letter-spacing:0;
-    margin-top:2px;
+    margin-top:3px;
   }
 
   .wrap{ max-width:1100px; margin:0 auto; padding:0 20px; }
@@ -102,73 +103,6 @@
     max-height:420px;
     filter:drop-shadow(0 20px 40px rgba(32,36,31,0.15));
   }
-
-  /* ===== PRODUCTOS ===== */
-  .productos{
-    padding:60px 0;
-  }
-  .productos h2.titulo-seccion{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:36px;
-    text-align:center;
-    margin:0 0 60px;
-  }
-
-  .producto{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    align-items:center;
-    padding:60px 0;
-    border-top:1px solid var(--line);
-  }
-  .producto:first-of-type{ border-top:none; }
-  .producto.invertido .foto{ order:2; }
-  .producto.invertido .info{ order:1; }
-
-  .producto .foto img{
-    width:100%;
-    height:auto;
-    max-height:380px;
-    object-fit:contain;
-    border-radius:var(--radius);
-    background:#fff;
-    padding:24px;
-    box-shadow:0 2px 4px rgba(32,36,31,0.04), 0 20px 48px -24px rgba(32,36,31,0.18);
-  }
-
-  .producto .info h3{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:32px;
-    margin:0 0 12px;
-    letter-spacing:-0.01em;
-  }
-  .producto .info .precio{
-    font-family:'Newsreader', serif;
-    font-weight:500;
-    font-size:28px;
-    color:var(--amber);
-    margin:0 0 18px;
-  }
-  .producto .info p{
-    color:var(--ink-soft);
-    font-size:16px;
-    line-height:1.6;
-    margin:0 0 28px;
-  }
-  .producto .info .boton{
-    display:inline-block;
-    background:var(--amber);
-    color:#fff;
-    font-weight:600;
-    font-size:15px;
-    padding:14px 28px;
-    border-radius:12px;
-    text-decoration:none;
-  }
-  .producto .info .boton:hover{ transform:translateY(-1px); }
 
   /* ===== CÓMO FUNCIONA ===== */
   .como-funciona{
@@ -255,6 +189,74 @@
     margin:0;
   }
 
+  /* ===== PRODUCTOS ===== */
+  .productos{
+    padding:60px 0;
+    border-top:1px solid var(--line);
+  }
+  .productos h2.titulo-seccion{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:36px;
+    text-align:center;
+    margin:0 0 60px;
+  }
+
+  .producto{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+    padding:60px 0;
+    border-top:1px solid var(--line);
+  }
+  .producto:first-of-type{ border-top:none; }
+  .producto.invertido .foto{ order:2; }
+  .producto.invertido .info{ order:1; }
+
+  .producto .foto img{
+    width:100%;
+    height:auto;
+    max-height:380px;
+    object-fit:contain;
+    border-radius:var(--radius);
+    background:#fff;
+    padding:24px;
+    box-shadow:0 2px 4px rgba(32,36,31,0.04), 0 20px 48px -24px rgba(32,36,31,0.18);
+  }
+
+  .producto .info h3{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:32px;
+    margin:0 0 12px;
+    letter-spacing:-0.01em;
+  }
+  .producto .info .precio{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:28px;
+    color:var(--amber);
+    margin:0 0 18px;
+  }
+  .producto .info p{
+    color:var(--ink-soft);
+    font-size:16px;
+    line-height:1.6;
+    margin:0 0 28px;
+  }
+  .producto .info .boton{
+    display:inline-block;
+    background:var(--amber);
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 28px;
+    border-radius:12px;
+    text-decoration:none;
+  }
+  .producto .info .boton:hover{ transform:translateY(-1px); }
+
   /* ===== FOOTER ===== */
   footer{
     padding:40px 20px;
@@ -275,6 +277,9 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width:780px){
+    .topbar img{ height:60px; }
+    .topbar .marca-nombre{ font-size:18px; }
+
     .hero{
       grid-template-columns:1fr;
       text-align:center;
@@ -299,9 +304,6 @@
       gap:32px;
     }
     .como-funciona h2, .por-que h2{ font-size:28px; }
-
-    .topbar img{ height:40px; }
-    .topbar .marca-nombre{ font-size:17px; }
   }
 </style>
 </head>
@@ -331,12 +333,6 @@
     </section>
 
     <div class="wrap">
-
-      <!-- PRODUCTOS -->
-      <section class="productos" id="productos">
-        <h2 class="titulo-seccion">Elige tu formato</h2>
-        <div id="lista-productos"></div>
-      </section>
 
       <!-- CÓMO FUNCIONA -->
       <section class="como-funciona">
@@ -380,6 +376,12 @@
             <p>El cliente descontento puede contarlo en privado antes de dejarlo en Google.</p>
           </div>
         </div>
+      </section>
+
+      <!-- PRODUCTOS -->
+      <section class="productos" id="productos">
+        <h2 class="titulo-seccion">Elige tu formato</h2>
+        <div id="lista-productos"></div>
       </section>
 
     </div>
