@@ -1,28 +1,28 @@
 {
   "bar-viena": {
     "business_name": "Bar Viena",
-    "emoji": "?",
+    "emoji": "🍺☕",
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJV_esTU6SUA0R_kMWVoZzCSw",
     "owner_email": "marrublairigoyen@gmail.com"
   },
   "cerveceria-liverpool": {
     "business_name": "Cerveceria Liverpool",
-    "emoji": "?",
+    "emoji": "🍺☕",
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJCR3zSKqTUA0RyNit2JLRbNE",
     "owner_email": "admape@gmail.com"
   },
   "bar-arkupe": {
     "business_name": "Bar Arkupe",
-    "emoji": "?",
+    "emoji": "🍺☕",
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placeid=ChIJz2GPiF2SUA0RKj5P_veoiFo",
     "owner_email": "arrubla.irigoyen@gmail.com"
   },
   "cafe-iruna": {
     "business_name": "Cafe Iruña",
-    "emoji": "🍺",
+    "emoji": "🍺☕",
     "category": "hosteleria",
     "google_review_url": "https://search.google.com/local/writereview?placedide=ChIJAQxuXfmSUA0RYOkf1Muo0hQ",
     "owner_email": "arrubla.irigoyen@gmail.com"
