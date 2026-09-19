@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title>¿Qué tal tu visita?</title>
+<title>¿Qué tal tu visita? — Acelera tu reseña</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -29,10 +29,39 @@
     color:var(--ink);
     font-family:'IBM Plex Sans', sans-serif;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
     padding:28px 18px;
     min-height:100vh;
+    gap:24px;
+  }
+
+  /* ===== LOGO DE MARCA ARRIBA ===== */
+  .marca-top{
+    text-align:center;
+  }
+  .marca-top img{
+    height:90px;
+    width:auto;
+    display:block;
+    margin:0 auto;
+  }
+  .marca-top .marca-nombre{
+    display:block;
+    font-family:'Newsreader', serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    margin-top:4px;
+    letter-spacing:-0.01em;
+  }
+  .marca-top .marca-claim{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:10px;
+    color:var(--ink-soft);
+    margin-top:1px;
   }
 
   .card{
@@ -160,9 +189,21 @@
   @media (prefers-reduced-motion: reduce){
     .step-2.active{ animation:none; }
   }
+
+  /* ===== MÓVIL ===== */
+  @media (max-width:520px){
+    .marca-top img{ height:80px; }
+  }
 </style>
 </head>
 <body>
+
+  <!-- MARCA -->
+  <div class="marca-top">
+    <img src="logo.PNG" alt="Acelera tu reseña">
+    <span class="marca-nombre">Acelera tu reseña</span>
+    <span class="marca-claim">Más reseñas, menos esfuerzo</span>
+  </div>
 
   <div class="card">
     <div class="business">
@@ -309,46 +350,7 @@
      ============================================================ */
   document.getElementById('continuar').addEventListener('click', async () => {
     const textarea = document.getElementById('feedbackText');
-    // Si el cliente escribió algo, se usa eso. Si no, se usa la sugerencia.
     textoCliente = textarea.value.trim() || sugerenciaActual;
 
     if (textoCliente) {
-      try {
-        await navigator.clipboard.writeText(textoCliente);
-        mostrarToast('copyToast', 'Copiado en el portapapeles');
-      } catch (e) {
-        console.warn('No se pudo copiar:', e);
-      }
-    }
-
-    document.getElementById('step1').classList.add('hidden');
-    document.getElementById('step2').classList.add('active');
-  });
-
-  /* ============================================================
-     PASO 2: Google
-     ============================================================ */
-  document.getElementById('googleLink').addEventListener('click', () => {
-    registrarActividad('google', textoCliente);
-  });
-
-  /* ============================================================
-     PASO 2: Privado (mailto)
-     ============================================================ */
-  document.getElementById('sendPrivate').addEventListener('click', () => {
-    if(!CONFIG) return;
-    const subject = encodeURIComponent('Comentario de un cliente — ' + CONFIG.businessName);
-    const body = encodeURIComponent(textoCliente || '(Sin comentario)');
-    window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
-    registrarActividad('privada', textoCliente);
-
-    setTimeout(() => {
-      if (document.visibilityState === 'visible' && document.hasFocus()) {
-        mostrarToast('mailToast', 'Se necesita una aplicación de correo instalada.');
-      }
-    }, 1000);
-  });
-</script>
-
-</body>
-</html>
+      try
