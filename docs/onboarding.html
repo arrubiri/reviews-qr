@@ -173,13 +173,10 @@
 
   <div class="card">
 
-    <!-- CARGANDO -->
     <div id="cargando" class="cargando">Comprobando tu compra…</div>
 
-    <!-- ERROR -->
     <div id="error" class="result err oculto"></div>
 
-    <!-- FORMULARIO -->
     <div id="formulario" class="oculto">
       <h1>Un último paso</h1>
       <p class="sub">Cuéntanos los datos de tu negocio para personalizar tus QRs. Solo tardarás 30 segundos.</p>
@@ -190,7 +187,7 @@
       <input id="nombre" placeholder="Bar Viena" maxlength="60">
 
       <label>URL de tu reseña en Google</label>
-      <input id="google_url" placeholder="https://search.google.com/local/writereview?placeid=..." maxlength="300">
+      <input id="google_url" placeholder="https://search.google.com/local/writereview?placeid=..." maxlength="500">
       <div class="hint">Es el enlace que lleva a tus clientes al formulario de Google. Si no lo tienes, escríbenos.</div>
 
       <label>Email del dueño</label>
@@ -202,7 +199,6 @@
       <div id="resultado" class="result"></div>
     </div>
 
-    <!-- FINAL -->
     <div id="final" class="final oculto">
       <span class="emoji">🎉</span>
       <h2>¡Todo listo!</h2>
@@ -228,15 +224,13 @@
     }
 
     try {
-      const res = await fetch(ADMIN_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          accion: 'consultar_sesion',
-          token: ADMIN_TOKEN,
-          session_id: sessionId
-        })
+      const qs = new URLSearchParams({
+        accion: 'consultar_sesion',
+        token: ADMIN_TOKEN,
+        session_id: sessionId
       });
+
+      const res = await fetch(ADMIN_URL + '?' + qs.toString());
       const data = await res.json();
 
       if (!data.ok) {
@@ -291,18 +285,16 @@
     r.textContent = '';
 
     try {
-      const res = await fetch(ADMIN_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({
-          accion: 'onboarding',
-          token: ADMIN_TOKEN,
-          session_id: sessionId,
-          nombre: nombre,
-          google_url: googleUrl,
-          email: email
-        })
+      const qs = new URLSearchParams({
+        accion: 'onboarding',
+        token: ADMIN_TOKEN,
+        session_id: sessionId,
+        nombre: nombre,
+        google_url: googleUrl,
+        email: email
       });
+
+      const res = await fetch(ADMIN_URL + '?' + qs.toString());
       const data = await res.json();
 
       if (!data.ok) {
@@ -318,7 +310,6 @@
         return;
       }
 
-      // Éxito
       document.getElementById('formulario').classList.add('oculto');
       document.getElementById('final').classList.remove('oculto');
 
