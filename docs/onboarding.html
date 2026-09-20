@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Completa tu compra — Acelera tu reseña</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEEE6;
+    --card:#FFFFFF;
+    --ink:#20241F;
+    --ink-soft:#565E54;
+    --amber:#C9982E;
+    --line:#E2E1D6;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 20px;
+    min-height:100vh;
+    gap:20px;
+  }
+
+  .marca-top{ text-align:center; }
+  .marca-top img{
+    height:140px;
+    width:auto;
+    display:block;
+    margin:0 auto;
+  }
+  .marca-top .marca-nombre{
+    display:block;
+    font-family:'Newsreader', serif;
+    font-size:18px;
+    font-weight:500;
+    color:var(--ink);
+    margin-top:-14px;
+    letter-spacing:-0.01em;
+  }
+  .marca-top .marca-claim{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:18px;
+    padding:36px 32px;
+    max-width:520px;
+    width:100%;
+    border:1px solid var(--line);
+    box-shadow:0 12px 32px -16px rgba(32,36,31,0.18);
+  }
+
+  h1{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:26px;
+    margin:0 0 10px;
+    line-height:1.2;
+  }
+  p.sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.55;
+    margin:0 0 24px;
+  }
+
+  .resumen{
+    background:#F9F9F9;
+    border-radius:12px;
+    padding:14px 18px;
+    margin-bottom:24px;
+    font-size:14px;
+    color:var(--ink-soft);
+    display:none;
+  }
+  .resumen strong{ color:var(--ink); }
+
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin:14px 0 6px;
+    color:var(--ink-soft);
+  }
+  input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-size:14.5px;
+    font-family:inherit;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus{ outline:2px solid #E7DCC2; border-color:var(--amber); }
+  .hint{ font-size:12px; color:#9BA096; margin-top:4px; }
+
+  button{
+    width:100%;
+    padding:15px;
+    background:var(--amber);
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:22px;
+    font-family:inherit;
+  }
+  button:disabled{ background:#ccc; cursor:not-allowed; }
+
+  .result{
+    margin-top:20px;
+    padding:18px;
+    border-radius:12px;
+    font-size:14px;
+    line-height:1.55;
+    display:none;
+  }
+  .result.ok{ display:block; background:#DDE6E2; color:#3E6259; }
+  .result.err{ display:block; background:#F4E0DC; color:#8A3A2A; }
+
+  .cargando{
+    text-align:center;
+    color:var(--ink-soft);
+    padding:40px 0;
+    font-size:14px;
+  }
+
+  .oculto{ display:none; }
+
+  .final{
+    text-align:center;
+  }
+  .final .emoji{ font-size:56px; display:block; margin-bottom:12px; }
+  .final h2{
+    font-family:'Newsreader', serif;
+    font-weight:500;
+    font-size:26px;
+    margin:0 0 12px;
+  }
+  .final p{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.55;
+    margin:0 0 10px;
+  }
+</style>
+</head>
+<body>
+
+  <div class="marca-top">
+    <img src="logo.png" alt="Acelera tu reseña">
+    <span class="marca-nombre">Acelera tu reseña</span>
+    <span class="marca-claim">Más reseñas, menos esfuerzo</span>
+  </div>
+
+  <div class="card">
+
+    <!-- CARGANDO -->
+    <div id="cargando" class="cargando">Comprobando tu compra…</div>
+
+    <!-- ERROR -->
+    <div id="error" class="result err"></div>
+
+    <!-- FORMULARIO -->
+    <div id="formulario" class="oculto">
+      <h1>Un último paso</h1>
+      <p class="sub">Cuéntanos los datos de tu negocio para personalizar tus QRs. Solo tardarás 30 segundos.</p>
+
+      <div class="resumen" id="resumen"></div>
+
+      <label>Nombre del negocio</label>
+      <input id="nombre" placeholder="Bar Viena" maxlength="60">
+
+      <label>URL de tu reseña en Google</label>
+      <input id="google_url" placeholder="https://search.google.com/local/writereview?placeid=..." maxlength="300">
+      <div class="hint">Es el enlace que lleva a tus clientes al formulario de Google. Si no lo tienes, escríbenos.</div>
+
+      <label>Email del dueño</label>
+      <input id="email" type="email" placeholder="dueño@ejemplo.com" maxlength="120">
+      <div class="hint">Aquí recibirás los avisos de comentarios privados y el informe mensual.</div>
+
+      <button id="enviar">Guardar y terminar</button>
+
+      <div id="resultado" class="result"></div>
+    </div>
+
+    <!-- FINAL -->
+    <div id="final" class="final oculto">
+      <span class="emoji">🎉</span>
+      <h2>¡Todo listo!</h2>
+      <p>Hemos configurado tus QRs para tu negocio.</p>
+      <p>En breve recibirás un email con los códigos y tu página personalizada.</p>
+    </div>
+
+  </div>
+
+<script>
+  const ADMIN_URL = 'https://script.google.com/macros/s/AKfycbxdLmsYV3wPMQvgqE-T9j1_gQEH-mipEUTMsDK3ICwyce_jSaDKOBPwZpwoMCtKcQ03/exec';
+  const ADMIN_TOKEN = '69e39400-cb07-46a4-a0cb-5dea19c52612';
+
+  let SESION = null;
+
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get('session_id');
+
+  async function consultarSesion() {
+    if (!sessionId) {
+      mostrarError('Falta el identificador de la compra en la URL. Vuelve al enlace del email o contacta con nosotros.');
+      return;
+    }
+
+    try {
+      const res = await fetch(ADMIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          accion: 'consultar_sesion',
+          token: ADMIN_TOKEN,
+          session_id: sessionId
+        })
+      });
+      const data = await res.json();
+
+      if (!data.ok) {
+        mostrarError('No hemos podido comprobar tu compra: ' + (data.error || 'desconocido'));
+        return;
+      }
+
+      SESION = data;
+
+      document.getElementById('cargando').classList.add('oculto');
+      document.getElementById('formulario').classList.remove('oculto');
+
+      const resumen = document.getElementById('resumen');
+      resumen.style.display = 'block';
+      resumen.innerHTML = 'Has comprado: <strong>' + data.cantidad + ' × ' + data.producto + '</strong>';
+
+      if (data.email_comprador) {
+        document.getElementById('email').value = data.email_comprador;
+      }
+
+    } catch (e) {
+      mostrarError('Error de red: ' + e.message);
+    }
+  }
+
+  function mostrarError(msg) {
+    document.getElementById('cargando').classList.add('oculto');
+    document.getElementById('formulario').classList.add('oculto');
+    const err = document.getElementById('error');
+    err.textContent = msg;
+    err.classList.add('err');
+  }
+
+  document.getElementById('enviar').addEventListener('click', async () => {
+    const nombre = document.getElementById('nombre').value.trim();
+    const googleUrl = document.getElementById('google_url').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!nombre || !googleUrl || !email) {
+      const r = document.getElementById('resultado');
+      r.className = 'result err';
+      r.textContent = 'Rellena todos los campos.';
+      return;
+    }
+
+    const btn = document.getElementById('enviar');
+    btn.disabled = true;
+    btn.textContent = 'Guardando…';
+
+    const r = document.getElementById('resultado');
+    r.className = 'result';
+    r.textContent = '';
+
+    try {
+      const res = await fetch(ADMIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          accion: 'onboarding',
+          token: ADMIN_TOKEN,
+          session_id: sessionId,
+          nombre: nombre,
+          google_url: googleUrl,
+          email: email
+        })
+      });
+      const data = await res.json();
+
+      if (!data.ok) {
+        r.className = 'result err';
+        const errores = {
+          forbidden: 'Error de autenticación.',
+          sin_stock: 'No tenemos suficientes QRs disponibles en stock. Contáctanos.',
+          faltan_datos: 'Faltan datos por rellenar.'
+        };
+        r.textContent = errores[data.error] || ('Error: ' + JSON.stringify(data));
+        btn.disabled = false;
+        btn.textContent = 'Guardar y terminar';
+        return;
+      }
+
+      // Éxito
+      document.getElementById('formulario').classList.add('oculto');
+      document.getElementById('final').classList.remove('oculto');
+
+    } catch (e) {
+      r.className = 'result err';
+      r.textContent = 'Error de red: ' + e.message;
+      btn.disabled = false;
+      btn.textContent = 'Guardar y terminar';
+    }
+  });
+
+  consultarSesion();
+</script>
+
+</body>
+</html>
