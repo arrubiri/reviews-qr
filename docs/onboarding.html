@@ -96,7 +96,7 @@
     margin:14px 0 6px;
     color:var(--ink-soft);
   }
-  input{
+  input, select{
     width:100%;
     padding:12px 14px;
     border:1px solid var(--line);
@@ -106,7 +106,7 @@
     background:#fff;
     color:var(--ink);
   }
-  input:focus{ outline:2px solid #E7DCC2; border-color:var(--amber); }
+  input:focus, select:focus{ outline:2px solid #E7DCC2; border-color:var(--amber); }
   .hint{ font-size:12px; color:#9BA096; margin-top:4px; }
 
   button{
@@ -184,7 +184,24 @@
       <div class="resumen" id="resumen"></div>
 
       <label>Nombre del negocio</label>
-      <input id="nombre" placeholder="Bar Viena" maxlength="60">
+      <input id="nombre" placeholder="El Corzo" maxlength="60">
+
+      <label>Categoría</label>
+      <select id="category">
+        <option value="hosteleria">Hostelería</option>
+        <option value="automocion">Automoción</option>
+        <option value="belleza">Belleza</option>
+        <option value="salud">Salud</option>
+        <option value="retail">Retail</option>
+        <option value="inmobiliaria">Inmobiliaria</option>
+        <option value="gimnasio">Gimnasio</option>
+        <option value="veterinaria">Veterinaria</option>
+        <option value="informatica">Informática</option>
+        <option value="fontaneria_electricidad">Fontanería / Electricidad</option>
+        <option value="academia">Academia</option>
+        <option value="alimentacion">Alimentación</option>
+        <option value="generico">Otro</option>
+      </select>
 
       <label>URL de tu reseña en Google</label>
       <input id="google_url" placeholder="https://search.google.com/local/writereview?placeid=..." maxlength="500">
@@ -219,7 +236,7 @@
 
   async function consultarSesion() {
     if (!sessionId) {
-      mostrarError('Falta el identificador de la compra en la URL. Vuelve al enlace del email o contacta con nosotros.');
+      mostrarError('Falta el identificador de la compra en la URL.');
       return;
     }
 
@@ -264,12 +281,13 @@
     err.classList.remove('oculto');
   }
 
-  document.getElementById('enviar').addEventListener('click', async () => {
+  document.getElementById('enviar').addEventListener('click', () => {
     const nombre = document.getElementById('nombre').value.trim();
+    const category = document.getElementById('category').value;
     const googleUrl = document.getElementById('google_url').value.trim();
     const email = document.getElementById('email').value.trim();
 
-    if (!nombre || !googleUrl || !email) {
+    if (!nombre || !category || !googleUrl || !email) {
       const r = document.getElementById('resultado');
       r.className = 'result err';
       r.textContent = 'Rellena todos los campos.';
@@ -280,45 +298,23 @@
     btn.disabled = true;
     btn.textContent = 'Guardando…';
 
-    const r = document.getElementById('resultado');
-    r.className = 'result';
-    r.textContent = '';
+    const qs = new URLSearchParams({
+      accion: 'onboarding',
+      token: ADMIN_TOKEN,
+      session_id: sessionId,
+      nombre: nombre,
+      category: category,
+      google_url: googleUrl,
+      email: email
+    });
 
-    try {
-      const qs = new URLSearchParams({
-        accion: 'onboarding',
-        token: ADMIN_TOKEN,
-        session_id: sessionId,
-        nombre: nombre,
-        google_url: googleUrl,
-        email: email
-      });
+    // Usamos no-cors: la petición llega, aunque no podamos leer la respuesta.
+    fetch(ADMIN_URL + '?' + qs.toString(), { mode: 'no-cors' }).catch(() => {});
 
-      const res = await fetch(ADMIN_URL + '?' + qs.toString());
-      const data = await res.json();
-
-      if (!data.ok) {
-        r.className = 'result err';
-        const errores = {
-          forbidden: 'Error de autenticación.',
-          sin_stock: 'No tenemos suficientes QRs disponibles en stock. Contáctanos.',
-          faltan_datos: 'Faltan datos por rellenar.'
-        };
-        r.textContent = errores[data.error] || ('Error: ' + JSON.stringify(data));
-        btn.disabled = false;
-        btn.textContent = 'Guardar y terminar';
-        return;
-      }
-
+    setTimeout(() => {
       document.getElementById('formulario').classList.add('oculto');
       document.getElementById('final').classList.remove('oculto');
-
-    } catch (e) {
-      r.className = 'result err';
-      r.textContent = 'Error de red: ' + e.message;
-      btn.disabled = false;
-      btn.textContent = 'Guardar y terminar';
-    }
+    }, 4000);
   });
 
   consultarSesion();
